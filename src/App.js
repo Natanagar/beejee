@@ -4,11 +4,21 @@ import TasksList from './components/TasksList'
 import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+  }
+  state = {
+      email: '',
+      password: ''
+  }
   render() {
     return (
       <div className="App">
         <TasksList />
-        <Task />
+        <Task 
+        valueEmail={this.state.email}
+        valuePassword={this.state.password}
+        />
       </div>
     );
   }
