@@ -9,9 +9,8 @@ export default class Task extends React.Component {
     
    
   render() {
-    const { valueEmail, valuePassword, submit, reset, showTask } = this.props;
-    console.log(valueEmail, valuePassword, submit, reset)
-    console.log(this.props);
+    const { valueEmail, valuePassword, submit, reset, showTask, handleChangeEmail, checkedEmail } = this.props;
+   
     return (
       <Form className="validationForm">
         <FormGroup row>
@@ -22,8 +21,8 @@ export default class Task extends React.Component {
             name="email" 
             id="exampleEmail" 
             placeholder="write your email"
-            //value={valueEmail}
-            //onChange={query}
+            value={valueEmail}
+            onChange={handleChangeEmail}
             />
           </Col>
             <FormText color="danger" style ={{
@@ -32,6 +31,14 @@ export default class Task extends React.Component {
              }}>
                 Please, include an '@' in the email address. 'not email' is missing an '@'
             </FormText>
+            <FormText color="danger" className="dangerMessage" style ={{
+                textAlign: 'center',
+                marginLeft: '225px',
+                display: 'none'
+             }}>
+                Your email is not valid
+            </FormText>
+
         </FormGroup>
         <FormGroup row>
           <Label for="examplePassword" sm={2}>Password</Label>

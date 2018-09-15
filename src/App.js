@@ -13,17 +13,28 @@ class App extends Component {
   }
   state = {
       email: '',
-      password: ''
+      password: '',
+      checkedEmail: false
   }
-  handleChangeEmail = (query) => {
-    this.setState({
-      email : query
-    })
+  handleChangeEmail = (event, value) => {
+    value = event.target.value.substr(0, 30);
+    
+    if(typeof value !== 'undefined'){
+      console.log(value);
+    }
+    if(value !== this.state.email){
+      this.setState({
+        email : value
+      })
+    }
+    
   }
+
   submit = () => {console.log("banana")}
   reset = () => {console.log('wowow')}
   showTask =() => {console.log('blablabla')}
   render() {
+    console.log(this.state.email)
     return (
       <div className="App">
         <TasksList />
@@ -33,6 +44,8 @@ class App extends Component {
         submit = {this.submit}
         reset={this.reset}
         showTask={this.showTask}
+        handleChangeEmail = {this.handleChangeEmail}
+        checkedEmail={this.state.checkedEmail}
         />
       </div>
     );
