@@ -40,48 +40,34 @@ export default class Task extends React.Component {
           <Col sm={10}>
             <Input type="file" name="file" id="exampleFile" />
             <FormText color="muted">
-              This is some placeholder block-level help text for the above input.
-              It's a bit lighter and easily wraps to a new line.
+              This file have to size no more 320х240 pixels. If you have more, your file will be cut in this size.
             </FormText>
           </Col>
         </FormGroup>
-        <FormGroup tag="fieldset" row>
-          <legend className="col-form-label col-sm-2">Radio Buttons</legend>
-          <Col sm={10}>
+        <FormGroup row>
+          <Label for="checkbox2" sm={2}>Show me task</Label>
+          <Col sm={{ size: 10 }}>
             <FormGroup check>
               <Label check>
-                <Input type="radio" name="radio2" />{' '}
-                Option one is this and that—be sure to include why it's great
-              </Label>
-            </FormGroup>
-            <FormGroup check>
-              <Label check>
-                <Input type="radio" name="radio2" />{' '}
-                Option two can be something else and selecting it will deselect option one
-              </Label>
-            </FormGroup>
-            <FormGroup check disabled>
-              <Label check>
-                <Input type="radio" name="radio2" disabled />{' '}
-                Option three is disabled
+                <Button color="link">Click for show task</Button>
+                
               </Label>
             </FormGroup>
           </Col>
         </FormGroup>
-        <FormGroup row>
-          <Label for="checkbox2" sm={2}>Checkbox</Label>
+        <FormGroup row style={{
+            display: 'none'
+        }}>
+          <Label for="checkbox2" sm={2}>Your task</Label>
           <Col sm={{ size: 10 }}>
-            <FormGroup check>
-              <Label check>
-                <Input type="checkbox" id="checkbox2" />{' '}
-                Check me out
-              </Label>
-            </FormGroup>
+            <ul className='task'>
+            </ul>
           </Col>
         </FormGroup>
         <FormGroup check row>
           <Col sm={{ size: 10, offset: 2 }}>
-            <Button>Submit</Button>
+            <Button color="info">Reset</Button>
+            <Button color="primary">Submit</Button>
           </Col>
         </FormGroup>
       </Form>
