@@ -89,13 +89,11 @@ class App extends Component {
     console.log(`orange + orange`)
   }
   render(){
-    console.log(this.state)
     return (
       <div className="App">
         <TasksList />
         <Task 
-        valueEmail={this.state.user.email}
-        valuePassword={this.state.user.password}
+        user={this.state.user}
         submit = {this.submit}
         reset={this.reset}
         showTask={this.showTask}
@@ -103,6 +101,7 @@ class App extends Component {
         checkedEmail={this.state.checkedEmail}
         addNotes={this.addNotes}
         checkedPassword = {this.checkedPassword}
+        invalidEmail={this.state.invalidEmail}
         />
       </div>
     );

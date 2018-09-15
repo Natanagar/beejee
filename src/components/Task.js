@@ -10,8 +10,8 @@ export default class Task extends React.Component {
     
    
   render() {
-    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword } = this.props;
-    console.log(this.props)
+    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword, invalidEmail } = this.props;
+    
     return (
       <Form className="validationForm">
            { this.props.isMailSent ? <div className="success">Thank you for submission. Someone will be in contact with you shortly.</div> : null }
@@ -33,7 +33,7 @@ export default class Task extends React.Component {
              }}>
                 Please, include an '@' in the email address. 'not email' is missing an '@'
             </FormText>
-            {checkedEmail ? null : <FormText color="danger" style ={{textAlign: 'center', marginLeft: '225px'}}>Your email is not valid</FormText>}
+            {checkedEmail ? null : <FormText color="danger" style ={{textAlign: 'center', marginLeft: '225px'}}>{`Your email ${invalidEmail} is not valid`}</FormText>}
 
         </FormGroup>
         <FormGroup row>
