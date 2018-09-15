@@ -15,9 +15,11 @@ class App extends Component {
     this.checkedPassword = this.checkedPassword.bind(this);
   }
   state = {
-      email: '',
-      password: '',
-      notes : '',
+      user : {
+        email: '',
+        password: '',
+        notes : '',
+      },
       invalidEmail : '',
       formErrors: {email: '', password: ''},
       checkedEmail: false,
@@ -25,12 +27,19 @@ class App extends Component {
   }
   userHandleChange = (event, value) => {
     value = event.target.value.substr(0, 30);
+    console.log(this.state)
+    const { email, password} = this.state.user;
     if(typeof value !== 'undefined'){
       console.log(value);
         if (this.validateEmail(value)){
-          if(value !== this.state.email){
+          if(value !== this.state.user.email){
             this.setState({
-              email : value,
+              user: { 
+                email : value,
+                password : this.state.user.password,
+                notes : this.state.user.notes
+
+              },
               checkedEmail : true
             })
           }
@@ -50,18 +59,26 @@ class App extends Component {
   }
   addNotes = (event, value) => {
     let notes = event.target.value;
-    if(notes !== this.state.notes){
+    if(notes !== this.state.user.notes){
       this.setState({
-        notes : notes
+        user : {
+          email : this.state.user.email,
+          password : this.state.user.password,
+          notes : notes
+        }
       })
     }
   }
   checkedPassword = (event, value) => {
     const pass = event.target.value.substr(0, 20)
     console.log(pass)
-    if(pass !== this.state.password){
+    if(pass !== this.state.user.password){
       this.setState({
-        password : pass
+        user : {
+          email : this.state.user.email,
+          password : pass,
+          notes : this.state.user.notes
+        }
       })
     }
   } 
@@ -79,8 +96,8 @@ class App extends Component {
       <div className="App">
         <TasksList />
         <Task 
-        valueEmail={this.state.email}
-        valuePassword={this.state.password}
+        valueEmail={this.state.user.email}
+        valuePassword={this.state.user.password}
         submit = {this.submit}
         reset={this.reset}
         showTask={this.showTask}

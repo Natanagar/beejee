@@ -33,7 +33,7 @@ export default class Task extends React.Component {
              }}>
                 Please, include an '@' in the email address. 'not email' is missing an '@'
             </FormText>
-            <FormText color="danger" className="dangerMessage" style ={{textAlign: 'center', marginLeft: '225px', display: 'none'}}>Your email is not valid</FormText>
+            {checkedEmail ? null : <FormText color="danger" style ={{textAlign: 'center', marginLeft: '225px'}}>Your email is not valid</FormText>}
 
         </FormGroup>
         <FormGroup row>
