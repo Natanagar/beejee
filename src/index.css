@@ -11,3 +11,9 @@ body {
 .task{
   display: inline-block;
 }
+.success{
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px black;
+}

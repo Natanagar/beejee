@@ -18,20 +18,34 @@ class App extends Component {
       email: '',
       password: '',
       notes : '',
+      invalidEmail : '',
       formErrors: {email: '', password: ''},
-      checkedEmail: false
+      checkedEmail: false,
+      isMailSent : false
   }
   userHandleChange = (event, value) => {
     value = event.target.value.substr(0, 30);
     if(typeof value !== 'undefined'){
       console.log(value);
-      
+        if (this.validateEmail(value)){
+          if(value !== this.state.email){
+            this.setState({
+              email : value,
+              checkedEmail : true
+            })
+          }
+        } else {
+          if(value !== this.state.invalidEmail){ 
+            this.setState({
+              invalidEmail : value,
+              checkedEmail : false
+            })
+
+          }
+        }
+
     }
-    if(value !== this.state.email){
-      this.setState({
-        email : value
-      })
-    }
+    
     
   }
   addNotes = (event, value) => {
@@ -45,13 +59,22 @@ class App extends Component {
   checkedPassword = (event, value) => {
     const pass = event.target.value.substr(0, 20)
     console.log(pass)
+    if(pass !== this.state.password){
+      this.setState({
+        password : pass
+      })
+    }
   } 
+  validateEmail = (email) => {
+    const reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return reg.test(email);
+  }
 
   submit = () => {console.log("banana")}
   reset = () => {console.log('wowow')}
   showTask =() => {console.log('blablabla')}
-  render() {
-    console.log(this.state.notes)
+  render(){
+    console.log(this.state)
     return (
       <div className="App">
         <TasksList />
