@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
+
 export default class Task extends React.Component {
     constructor(props){
         super(props)
@@ -9,8 +10,8 @@ export default class Task extends React.Component {
     
    
   render() {
-    const { valueEmail, valuePassword, submit, reset, showTask, handleChangeEmail, checkedEmail } = this.props;
-   
+    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword } = this.props;
+    console.log(this.props)
     return (
       <Form className="validationForm">
         <FormGroup row>
@@ -21,8 +22,7 @@ export default class Task extends React.Component {
             name="email" 
             id="exampleEmail" 
             placeholder="write your email"
-            value={valueEmail}
-            onChange={handleChangeEmail}
+            onChange={userHandleChange}
             />
           </Col>
             <FormText color="danger" style ={{
@@ -48,7 +48,7 @@ export default class Task extends React.Component {
             name="password" 
             id="examplePassword" 
             placeholder="write your password"
-            //value={valuePassword}
+            onChange={checkedPassword}
             />
           </Col>
         </FormGroup>
@@ -74,7 +74,8 @@ export default class Task extends React.Component {
             <Input 
             type="textarea" 
             name="text" 
-            id="exampleText" />
+            id="exampleText" 
+            onChange = {addNotes}/>
           </Col>
         </FormGroup>
         <FormGroup row>
