@@ -9,8 +9,8 @@ export default class Task extends React.Component {
     
    
   render() {
-    const { valueEmail, valuePassword } = this.props;
-    console.log(valueEmail, valuePassword)
+    const { valueEmail, valuePassword, submit, reset } = this.props;
+    console.log(valueEmail, valuePassword, submit, reset)
     return (
       <Form className="validationForm">
         <FormGroup row>
@@ -92,9 +92,19 @@ export default class Task extends React.Component {
         </FormGroup>
         <FormGroup check row>
           <Col sm={{ size: 10, offset: 2 }}>
-            <Button color="info">Reset</Button>
+            <Button 
+            color="info"
+            onClick={reset}
+            >
+            Reset
+            </Button>
             <span>  </span>
-            <Button color="primary">Submit</Button>
+            <Button 
+            color="primary"
+            onClick={submit}
+            >
+            Submit
+            </Button>
           </Col>
         </FormGroup>
       </Form>

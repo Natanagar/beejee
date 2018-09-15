@@ -11,6 +11,8 @@ class App extends Component {
       email: '',
       password: ''
   }
+  submit = () => {console.log("banana")}
+  reset = () => {console.log('wowow')}
   render() {
     return (
       <div className="App">
@@ -18,6 +20,8 @@ class App extends Component {
         <Task 
         valueEmail={this.state.email}
         valuePassword={this.state.password}
+        submit = {this.submit}
+        reset={this.reset}
         />
       </div>
     );
