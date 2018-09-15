@@ -27,31 +27,27 @@ class App extends Component {
   }
   userHandleChange = (event, value) => {
     value = event.target.value.substr(0, 30);
-    console.log(this.state)
-    const { email, password} = this.state.user;
-    if(typeof value !== 'undefined'){
+    if(typeof value !== 'undefined'){ 
       console.log(value);
         if (this.validateEmail(value)){
           if(value !== this.state.user.email){
             this.setState({
               user: { 
-                email : value,
-                password : this.state.user.password,
-                notes : this.state.user.notes
-
-              },
+                email : value, 
+                password : this.state.user.password, 
+                notes : this.state.user.notes 
+              }, 
               checkedEmail : true
             })
-          }
-        } else {
-          if(value !== this.state.invalidEmail){ 
-            this.setState({
-              invalidEmail : value,
-              checkedEmail : false
+          } 
+        } else { 
+            console.log(false)
+            this.setState({ 
+              invalidEmail : value, 
+              checkedEmail : false 
             })
-
           }
-        }
+        
 
     }
     
@@ -89,7 +85,9 @@ class App extends Component {
 
   submit = () => {console.log("banana")}
   reset = () => {console.log('wowow')}
-  showTask =() => {console.log('blablabla')}
+  showTask = (event) => {
+    console.log(`orange + orange`)
+  }
   render(){
     console.log(this.state)
     return (

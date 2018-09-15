@@ -11,7 +11,7 @@ export default class Task extends React.Component {
    
   render() {
     const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword } = this.props;
-    console.log(checkedEmail)
+    console.log(this.props)
     return (
       <Form className="validationForm">
            { this.props.isMailSent ? <div className="success">Thank you for submission. Someone will be in contact with you shortly.</div> : null }
