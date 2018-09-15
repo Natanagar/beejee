@@ -9,8 +9,9 @@ export default class Task extends React.Component {
     
    
   render() {
-    const { valueEmail, valuePassword, submit, reset } = this.props;
+    const { valueEmail, valuePassword, submit, reset, showTask } = this.props;
     console.log(valueEmail, valuePassword, submit, reset)
+    console.log(this.props);
     return (
       <Form className="validationForm">
         <FormGroup row>
@@ -21,7 +22,8 @@ export default class Task extends React.Component {
             name="email" 
             id="exampleEmail" 
             placeholder="write your email"
-            value={valueEmail}
+            //value={valueEmail}
+            //onChange={query}
             />
           </Col>
             <FormText color="danger" style ={{
@@ -39,7 +41,7 @@ export default class Task extends React.Component {
             name="password" 
             id="examplePassword" 
             placeholder="write your password"
-            value={valuePassword}
+            //value={valuePassword}
             />
           </Col>
         </FormGroup>
@@ -49,7 +51,14 @@ export default class Task extends React.Component {
             <Input 
             type="select" 
             name="selectMulti" 
-            id="exampleSelectMulti" multiple />
+            id="exampleSelectMulti"
+            >
+                <option disabled>Choose your task</option>
+                <option value="Task1">Task 1</option>
+                <option selected value="Task2">Task 2</option>
+                <option value="Task3">Task 3</option>
+                <option value="Task4">Task 4</option>
+            </Input>
           </Col>
         </FormGroup>
         <FormGroup row>
@@ -75,7 +84,12 @@ export default class Task extends React.Component {
           <Col sm={{ size: 10 }}>
             <FormGroup check>
               <Label check>
-                <Button color="link">Click for show task</Button>
+                <Button 
+                color="link"
+                onClick={this.props.showTask}
+                >
+                Click for show task
+                </Button>
                 
               </Label>
             </FormGroup>
