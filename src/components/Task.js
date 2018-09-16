@@ -88,7 +88,7 @@ export default class Task extends React.Component {
             <FormText color="muted">
               This file have to size no more 320х240 pixels. If you have more, your file will be cut in this size.
             </FormText>
-            {(!checkedImage) ? (<FormText color="dark">This file's type is not a jpeg/jpg/png or file's size is more 320х240 pixels</FormText>) : null}
+            {(!checkedImage) ? (<FormText color="danger">This file's type is not a jpeg/jpg/png or file's size is more 320х240 pixels</FormText>) : null}
           </Col>
         </FormGroup>
         <FormGroup row>
@@ -123,7 +123,7 @@ export default class Task extends React.Component {
                             <td>{user.password}</td>
                             <td>Task</td>
                             <td>{user.notes}</td>
-                            <td>{user.file.name}</td>
+                            {!checkedImage ? <td>{`Image is not valid`}</td> : <td>{user.file.name}</td>}
                         </tr>
                     </tbody>
                 </Table>

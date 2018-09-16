@@ -24,8 +24,8 @@ class App extends Component {
         file : null
       },
       invalidEmail : '',
-      checkedEmail: false,
-      checkedImage : false,
+      checkedEmail: {},
+      checkedImage : {},
       isMailSent : false,
       isTaskShow : false
     }
@@ -129,7 +129,9 @@ class App extends Component {
         notes : '',
         file : null,
       },
-      checkedEmail: false,
+      invalidEmail : '',
+      checkedEmail: {},
+      checkedImage : {},
       isMailSent : false,
       isTaskShow : false
     })
@@ -161,19 +163,9 @@ class App extends Component {
         checkedImage : false
       })
     }
-    /*if( this.state.checkedImage ){
-      this.setState({
-        user : {
-          email: this.state.user.email,
-          password: this.state.user.password,
-          notes : this.state.user.notes,
-          file : uploadFile
-        },
-      })
-    }*/
   }
   render(){
-    console.log(this.state.user)
+    console.log(this.state)
       return(
         <div className="App">
           <TasksList />
