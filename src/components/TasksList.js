@@ -10,7 +10,7 @@ class TasksList extends Component{
     }
     render(){
         const { users } = this.props;
-        const Headers = ["UserType", "Email", "Task", "Status", "Image", "Notes" ];
+        const Headers = ["Email", "Task", "Status", "Image", "Notes" ];
         return(
             <div>
                 <Form className="admin" row>
@@ -28,10 +28,10 @@ class TasksList extends Component{
                     subTitle={`We have only ${users.length} tasks`}
                     headers={ Headers }
                     data={ users }
-                    columns="usertypes.email.task.status.image.notes"
+                    columns="email.text.status.image_path.notes"
                     perPageItemCount={ 3 }
                     totalCount={ users.length }
-                    //arrayOption={ [["size", 'all', ' ']] }
+                    arrayOption={ [["size", 'all', ' ']] }
                 />
             </div>
             <Button outline color="info">Add Task</Button>
