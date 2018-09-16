@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Task from './components/Task'
 import TasksList from './components/TasksList'
-import ErrorForm from './components/ErrorForm'
+import ErrorBoundary from './components/ErrorBoundary'
 import './App.css';
 
 class App extends Component {
@@ -23,8 +23,10 @@ class App extends Component {
       invalidEmail : '',
       formErrors: {email: '', password: ''},
       checkedEmail: false,
-      isMailSent : false
-  }
+      isMailSent : false,
+    }
+ 
+
   userHandleChange = (event, value) => {
     value = event.target.value.substr(0, 30);
     if(typeof value !== 'undefined'){ 
@@ -89,24 +91,25 @@ class App extends Component {
     console.log(`orange + orange`)
   }
   render(){
-    return (
-      <div className="App">
-        <TasksList />
-        <Task 
-        user={this.state.user}
-        submit = {this.submit}
-        reset={this.reset}
-        showTask={this.showTask}
-        userHandleChange = {this.userHandleChange}
-        checkedEmail={this.state.checkedEmail}
-        addNotes={this.addNotes}
-        checkedPassword = {this.checkedPassword}
-        invalidEmail={this.state.invalidEmail}
-        />
-      </div>
-    );
-  }
+      return(
+        <div className="App">
+          <TasksList />
+          <ErrorBoundary>
+            <Task 
+            user={this.state.user}
+            submit = {this.submit}
+            reset={this.reset}
+            showTask={this.showTask}
+            userHandleChange = {this.userHandleChange}
+            checkedEmail={this.state.checkedEmail}
+            addNotes={this.addNotes}
+            checkedPassword = {this.checkedPassword}
+            invalidEmail={this.state.invalidEmail}
+            />
+          </ErrorBoundary>
+        </div>
+      )
+    }
 }
 
 export default App;
-export const isEmail = string => !(/^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/i).test(string);
