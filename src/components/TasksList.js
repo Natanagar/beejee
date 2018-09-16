@@ -8,19 +8,55 @@ class TasksList extends Component{
     constructor(props){
         super(props)
     }
+    
     render(){
-        const { users } = this.props;
+        const { users, admin, checkEmailAndPasswordAdmin, getAdminEmail, checkedAdminEmail, checkedAdminPassword, getAdminPassword } = this.props;
+        console.log(checkedAdminPassword, checkedAdminEmail)
         const Headers = ["Email", "Task", "Status", "Image", "Notes" ];
-        return(
-            <div>
+        if(checkedAdminPassword && checkedAdminEmail){
+            return(
+                <div className="tablePagination">
+                        <TablePagination
+                            title="Todo application"
+                            subTitle={`We have only ${users.length} tasks`}
+                            headers={ Headers }
+                            data={ users }
+                            columns="email.text.status.image_path.notes"
+                            perPageItemCount={ 3 }
+                            totalCount={ users.length }
+                            arrayOption={ [["size", 'all', ' ']] }
+                            />
+                        <Button outline color="info">Add Task</Button>
+                    </div>)
+        } else {
+            return(
+                <div>
                 <Form className="admin" row>
                     <FormGroup>
-                        <Input type="email" name="email" id="exampleEmail" placeholder="Email" />
+                        <Input 
+                        type="email" 
+                        name="email" 
+                        id="exampleEmail" 
+                        placeholder="Email"
+                        onChange={getAdminEmail} 
+                        />
+                    {!checkedAdminEmail ? <FormText color="danger">Have not email</FormText> : null}
                     </FormGroup>
                     <FormGroup>
-                        <Input type="password" name="password" id="examplePassword" placeholder="Your password" />
+                        <Input 
+                        type="password" 
+                        name="password" 
+                        id="examplePassword" 
+                        placeholder="Your password"
+                        onChange={getAdminPassword} 
+                        />
+                    {!checkedAdminPassword ? <FormText color="danger">Have not password</FormText> : null}
                     </FormGroup>
-                    <Button>Submit</Button>
+                    <Button
+                    onClick={checkEmailAndPasswordAdmin}
+                    >
+                        Submit
+                    </Button>
                 </Form>
             <div>
                 <TablePagination
@@ -36,7 +72,8 @@ class TasksList extends Component{
             </div>
             <Button outline color="info">Add Task</Button>
         </div>
-        )
+            )
+        }
     }
 }
 export default TasksList;

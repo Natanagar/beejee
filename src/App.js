@@ -17,9 +17,16 @@ class App extends Component {
     this.addNotes = this.addNotes.bind(this);
     this.checkedPassword = this.checkedPassword.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
-    this.handleChangeTask = this.handleChangeTask.bind(this)
+    this.handleChangeTask = this.handleChangeTask.bind(this);
+    this.checkEmailAndPasswordAdmin = this.checkEmailAndPasswordAdmin.bind(this);
+    this.getAdminEmail = this.getAdminEmail.bind(this);
+    this.getAdminPassword = this.getAdminPassword.bind(this);
   }
   state = {
+      admin : {
+        email : 'our_admin@gmail.com',
+        password : "123"
+      },
       user : {
         email: '',
         password: '',
@@ -32,7 +39,9 @@ class App extends Component {
       checkedEmail: {},
       checkedImage : {},
       isMailSent : false,
-      isTaskShow : false
+      isTaskShow : false,
+      checkedAdminEmail : false,
+      checkedAdminPassword : false,
     }
  
 
@@ -174,6 +183,7 @@ class App extends Component {
     if(uploadFile.type === 'image/jpeg' || uploadFile.type === 'image/png'){
       this.setState({
         checkedImage : true,
+       
         user : {
           email: this.state.user.email,
           password: this.state.user.password,
@@ -190,8 +200,38 @@ class App extends Component {
       })
     }
   }
+  getAdminEmail = (event, value) => {
+    
+    const emailAdmin = event.target.value.substr(0,20);
+    if(emailAdmin === this.state.admin.email){
+        this.setState({
+          checkedAdminEmail : true
+        })
+    } else {
+      this.setState({
+        checkedAdminEmail : false
+      })
+    } 
+  }
+  getAdminPassword = (event, value) => {
+    const passwordAdmin = event.target.value.substr(0,20);
+    console.log(passwordAdmin)
+    if(passwordAdmin == this.state.admin.password){
+        this.setState({
+          checkedAdminPassword : true
+        })
+    } else {
+      this.setState({
+        checkedAdminPassword : false
+      })
+    } 
+  }
+  checkEmailAndPasswordAdmin = event => {
+    console.log('ADMIN')
+  }
   render(){
-    console.log(this.state.users)
+    console.log(this.state.checkedAdminEmail)
+    
       return(
         <div className="App">
         <Route 
@@ -199,6 +239,12 @@ class App extends Component {
             render={()=>(
               <TasksList 
               users={this.state.users}
+              admin={this.state.admin}
+              checkEmailAndPasswordAdmin={this.checkEmailAndPasswordAdmin}
+              getAdminEmail={this.getAdminEmail}
+              checkedAdminEmail={this.state.checkedAdminEmail}
+              checkedAdminPassword={this.state.checkedAdminPassword}
+              getAdminPassword={this.getAdminPassword}
               />
               )}
           />
