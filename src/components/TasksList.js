@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem} from 'reactstrap';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Input, FormText } from 'reactstrap';
 import { TablePagination } from 'react-pagination-table';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class TasksList extends Component{
-    constructor(props){
-        super(props)
-    }
     
     render(){
-        const { users, admin, checkEmailAndPasswordAdmin, getAdminEmail, checkedAdminEmail, checkedAdminPassword, getAdminPassword } = this.props;
-        console.log(checkedAdminPassword, checkedAdminEmail)
+        const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword } = this.props;
         const Headers = ["Email", "Task", "Status", "Image", "Notes" ];
-        if(checkedAdminPassword && checkedAdminEmail){
+        if(checkedAdminPassword && checkedAdminLogin){
             return(
                 <div className="tablePagination">
                         <TablePagination
@@ -37,10 +33,10 @@ class TasksList extends Component{
                         type="email" 
                         name="email" 
                         id="exampleEmail" 
-                        placeholder="Email"
-                        onChange={getAdminEmail} 
+                        placeholder="Login"
+                        onChange={getAdminLogin} 
                         />
-                    {!checkedAdminEmail ? <FormText color="danger">Have not email</FormText> : null}
+                    {!checkedAdminLogin ? <FormText color="danger">Have not login</FormText> : null}
                     </FormGroup>
                     <FormGroup>
                         <Input 
@@ -70,7 +66,11 @@ class TasksList extends Component{
                     arrayOption={ [["size", 'all', ' ']] }
                 />
             </div>
-            <Button outline color="info">Add Task</Button>
+            <Link
+                to='/task' 
+                outline color="info"
+                ><Button>Add Task</Button>
+            </Link>
         </div>
             )
         }

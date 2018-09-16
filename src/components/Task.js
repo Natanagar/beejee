@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { Alert, Col, Button, Form, FormGroup, Label, Input, FormText, Table } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 
 export default class Task extends React.Component {
-    constructor(props){
-        super(props)
-     
-
-    }
     
    
   render() {
-    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword, 
+    const { submit, reset, userHandleChange, checkedEmail, addNotes, checkedPassword, 
       checkedImage, invalidEmail, isTaskShow, handleChangeImage, handleChangeTask, user } = this.props;
    
     
@@ -154,12 +150,16 @@ export default class Task extends React.Component {
             Reset
             </Button>
             <span>  </span>
+            <Link
+              to='/'
+            >
             <Button 
             color="primary"
             onClick={submit}
             >
             Submit
             </Button>
+            </Link>
           </Col>
         </FormGroup>
       </Form>

@@ -19,12 +19,12 @@ class App extends Component {
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleChangeTask = this.handleChangeTask.bind(this);
     this.checkEmailAndPasswordAdmin = this.checkEmailAndPasswordAdmin.bind(this);
-    this.getAdminEmail = this.getAdminEmail.bind(this);
+    this.getAdminLogin = this.getAdminLogin.bind(this);
     this.getAdminPassword = this.getAdminPassword.bind(this);
   }
   state = {
       admin : {
-        email : 'our_admin@gmail.com',
+        login : 'admin',
         password : "123"
       },
       user : {
@@ -40,7 +40,7 @@ class App extends Component {
       checkedImage : {},
       isMailSent : false,
       isTaskShow : false,
-      checkedAdminEmail : false,
+      checkedAdminLogin : false,
       checkedAdminPassword : false,
     }
  
@@ -200,23 +200,22 @@ class App extends Component {
       })
     }
   }
-  getAdminEmail = (event, value) => {
-    
-    const emailAdmin = event.target.value.substr(0,20);
-    if(emailAdmin === this.state.admin.email){
+  getAdminLogin = (event, value) => {
+    const loginAdmin = event.target.value.substr(0,7);
+    console.log(loginAdmin)
+    if(loginAdmin === this.state.admin.login){
         this.setState({
-          checkedAdminEmail : true
+          checkedAdminLogin : true
         })
     } else {
       this.setState({
-        checkedAdminEmail : false
+        checkedAdminLogin : false
       })
     } 
   }
   getAdminPassword = (event, value) => {
     const passwordAdmin = event.target.value.substr(0,20);
-    console.log(passwordAdmin)
-    if(passwordAdmin == this.state.admin.password){
+    if(passwordAdmin === this.state.admin.password){
         this.setState({
           checkedAdminPassword : true
         })
@@ -230,7 +229,6 @@ class App extends Component {
     console.log('ADMIN')
   }
   render(){
-    console.log(this.state.checkedAdminEmail)
     
       return(
         <div className="App">
@@ -241,8 +239,8 @@ class App extends Component {
               users={this.state.users}
               admin={this.state.admin}
               checkEmailAndPasswordAdmin={this.checkEmailAndPasswordAdmin}
-              getAdminEmail={this.getAdminEmail}
-              checkedAdminEmail={this.state.checkedAdminEmail}
+              getAdminLogin={this.getAdminLogin}
+              checkedAdminLogin={this.state.checkedAdminLogin}
               checkedAdminPassword={this.state.checkedAdminPassword}
               getAdminPassword={this.getAdminPassword}
               />

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Alert, FormGroup, Button, FormText } from 'reactstrap';
 class ErrorBoundary extends Component{
-    constructor(props){
-        super(props)
-    }
+
     state = {
         hasError : false
     }
