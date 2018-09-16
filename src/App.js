@@ -15,12 +15,14 @@ class App extends Component {
     this.addNotes = this.addNotes.bind(this);
     this.checkedPassword = this.checkedPassword.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
+    this.handleChangeTask = this.handleChangeTask.bind(this)
   }
   state = {
       user : {
         email: '',
         password: '',
         notes : '',
+        task : null,
         file : null
       },
       invalidEmail : '',
@@ -42,6 +44,7 @@ class App extends Component {
                 email : value, 
                 password : this.state.user.password, 
                 notes : this.state.user.notes,
+                task : this.state.user.task,
                 file : this.state.user.file 
               }, 
               checkedEmail : true
@@ -68,6 +71,7 @@ class App extends Component {
           email : this.state.user.email,
           password : this.state.user.password,
           notes : notes,
+          task : this.state.user.task,
           file : this.state.user.file
         }
       })
@@ -82,6 +86,7 @@ class App extends Component {
           email : this.state.user.email,
           password : pass,
           notes : this.state.user.notes,
+          task : this.state.user.task,
           file : this.state.user.file
         }
       })
@@ -105,6 +110,7 @@ class App extends Component {
         user : this.state.user.email,
         password : this.state.user.password,
         notes : this.state.user.notes,
+        task : this.state.user.task,
         file : this.state.user.file
         },
       config: { headers: {'Content-Type': 'multipart/form-data' },
@@ -128,6 +134,7 @@ class App extends Component {
         password: '',
         notes : '',
         file : null,
+        task : null
       },
       invalidEmail : '',
       checkedEmail: {},
@@ -141,11 +148,26 @@ class App extends Component {
       isTaskShow : true
     })
   }
+  handleChangeTask = event => {
+    event.preventDefault();
+    const task = event.target.value;
+    this.setState({
+      user : {
+        email: this.state.user.email,
+        password: this.state.user.password,
+        notes : this.state.user.notes,
+        task : task,
+        file : this.state.user.file
+      }
+    })
+  }
   handleChangeImage = (event, value) => {
     event.preventDefault();
     const uploadFile = event.target.files[0];
     //check type of image and resize
     console.log(uploadFile.type)
+
+    //check size or width with height!!!
     if(uploadFile.type === 'image/jpeg' || uploadFile.type === 'image/png'){
       this.setState({
         checkedImage : true,
@@ -153,6 +175,7 @@ class App extends Component {
           email: this.state.user.email,
           password: this.state.user.password,
           notes : this.state.user.notes,
+          task : this.state.user.task,
           file : uploadFile
         }
 
@@ -183,6 +206,7 @@ class App extends Component {
             checkedPassword = {this.checkedPassword}
             invalidEmail={this.state.invalidEmail}
             isTaskShow={this.state.isTaskShow}
+            handleChangeTask = {this.handleChangeTask}
             />
           </ErrorBoundary>
         </div>

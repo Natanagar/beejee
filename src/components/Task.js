@@ -10,8 +10,9 @@ export default class Task extends React.Component {
     
    
   render() {
-    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword, checkedImage, invalidEmail, isTaskShow, handleChangeImage, user } = this.props;
-    console.log(checkedImage)
+    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword, 
+      checkedImage, invalidEmail, isTaskShow, handleChangeImage, handleChangeTask, user } = this.props;
+   
     
     return (
       <Form className="validationForm">
@@ -56,10 +57,12 @@ export default class Task extends React.Component {
             type="select" 
             name="selectMulti" 
             id="exampleSelectMulti"
+            onChange={handleChangeTask}
+            defaultValue="Task2"
             >
                 <option disabled>Choose your task</option>
                 <option value="Task1">Task 1</option>
-                <option selected value="Task2">Task 2</option>
+                <option value="Task2">Task 2</option>
                 <option value="Task3">Task 3</option>
                 <option value="Task4">Task 4</option>
             </Input>
@@ -121,7 +124,7 @@ export default class Task extends React.Component {
                             <th scope="row">1</th>
                             {!checkedEmail ? <td>{`${invalidEmail} is not valid`}</td> : <td>{user.email}</td>}
                             <td>{user.password}</td>
-                            <td>Task</td>
+                            <td>{user.task}</td>
                             <td>{user.notes}</td>
                             {!checkedImage ? <td>{`Image is not valid`}</td> : <td>{user.file.name}</td>}
                         </tr>
