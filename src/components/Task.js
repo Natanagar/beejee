@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Alert, Col, Button, Form, FormGroup, Label, Input, FormText, Table } from 'reactstrap';
 
 
 export default class Task extends React.Component {
@@ -10,7 +10,8 @@ export default class Task extends React.Component {
     
    
   render() {
-    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword, invalidEmail, isTaskShow } = this.props;
+    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword, invalidEmail, isTaskShow, user } = this.props;
+    
     
     return (
       <Form className="validationForm">
@@ -96,7 +97,30 @@ export default class Task extends React.Component {
                 </Button>
                 
               </Label>
-              {isTaskShow ? <Alert color="primary"><FormText color="muted">Hello World!</FormText></Alert> : null}
+              {isTaskShow ? <Alert color="primary"><FormText color="muted">
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Task</th>
+                            <th>Notes</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            {!checkedEmail ? <td>{invalidEmail}</td> : <td>{user.email}</td>}
+                            <td>{user.password}</td>
+                            <td>Task</td>
+                            <td>{user.notes}</td>
+                            <td>Image</td>
+                        </tr>
+                    </tbody>
+                </Table>
+              </FormText></Alert> : null}
               
             </FormGroup>
           </Col>
