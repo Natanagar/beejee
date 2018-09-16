@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Input, FormText } from 'reactstrap';
 import { TablePagination } from 'react-pagination-table';
 import { Link } from 'react-router-dom';
+import Table from './Table';
 import PropTypes from 'prop-types';
 
 class TasksList extends Component{
@@ -9,22 +10,21 @@ class TasksList extends Component{
     render(){
         const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword } = this.props;
         const Headers = ["Email", "Task", "Status", "Image", "Notes" ];
+        console.log(users)
         if(checkedAdminPassword && checkedAdminLogin){
             return(
                 <div className="tablePagination">
-                        <TablePagination
-                            title="Todo application"
-                            subTitle={`We have only ${users.length} tasks`}
-                            headers={ Headers }
-                            data={ users }
-                            columns="email.text.status.image_path.notes"
-                            perPageItemCount={ 3 }
-                            totalCount={ users.length }
-                            arrayOption={ [["size", 'all', ' ']] }
-                            />
+                    <Table 
+                    users={users}
+                    />   
                         <Link 
                         to='/task'
                         >
+                             <Button 
+                            outline color="primary"
+                            >
+                            Send
+                            </Button>
                             <Button 
                             outline color="info"
                             >
@@ -91,6 +91,8 @@ class TasksList extends Component{
         }
     }
 }
+
+
 Input.propTypes = {
     children: PropTypes.node,
     // type can be things like text, password, (typical input types) as well as select and textarea, providing children as you normally would to those.
@@ -160,4 +162,4 @@ Input.propTypes = {
     size: PropTypes.string
   }
   
-export default TasksList;
+  export default TasksList;

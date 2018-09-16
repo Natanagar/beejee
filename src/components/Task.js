@@ -17,6 +17,7 @@ export default class Task extends React.Component {
       className="validationForm"
       role="form"
       >
+      <h2>Add Task</h2>
            { this.props.isMailSent ? <div className="success">Thank you for submission. Someone will be in contact with you shortly.</div> : null }
 
         <FormGroup row>
