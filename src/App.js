@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Task from './components/Task'
 import TasksList from './components/TasksList'
-import ErrorBoundary from './components/ErrorBoundary'
+import ErrorBoundary from './components/ErrorBoundary';
+import axios from 'axios';
 import './App.css';
 
 class App extends Component {
@@ -21,7 +22,6 @@ class App extends Component {
         notes : '',
       },
       invalidEmail : '',
-      formErrors: {email: '', password: ''},
       checkedEmail: false,
       isMailSent : false,
       isTaskShow : false
@@ -86,10 +86,45 @@ class App extends Component {
     return reg.test(email);
   }
 
-  submit = () => {console.log("banana")}
-  reset = () => {console.log('wowow')}
+  submit = (event) => {
+    console.log("banana")
+
+    axios({
+      method: 'post',
+      url: 'https://uxcandy.com/~shapoval/test-task-backend',
+      crossDomain: true,
+      headers : {
+        'Content-Type': 'multipart/form-data'
+      },
+      processData: false,
+      data: {
+        user : this.state.user.email,
+        password : this.state.user.password,
+        notes : this.state.user.notes
+      },
+      config: { headers: {'Content-Type': 'multipart/form-data' }}
+    }).then(function (response) {
+      //handle success
+      console.log(response);
+  })
+  .catch(function (response) {
+      //handle error
+      console.log(response);
+  });
+  }
+  reset = (event) => {
+    this.setState({
+      user : {
+        email: '',
+        password: '',
+        notes : '',
+      },
+      checkedEmail: false,
+      isMailSent : false,
+      isTaskShow : false
+    })
+  }
   showTask = (event) => {
-    console.log(`orange + orange`)
     this.setState({
       isTaskShow : true
     })
