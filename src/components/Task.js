@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Alert, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 
 export default class Task extends React.Component {
@@ -10,7 +10,7 @@ export default class Task extends React.Component {
     
    
   render() {
-    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword, invalidEmail } = this.props;
+    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword, invalidEmail, isTaskShow } = this.props;
     
     return (
       <Form className="validationForm">
@@ -96,6 +96,8 @@ export default class Task extends React.Component {
                 </Button>
                 
               </Label>
+              {isTaskShow ? <Alert color="primary"><FormText color="muted">Hello World!</FormText></Alert> : null}
+              
             </FormGroup>
           </Col>
         </FormGroup>

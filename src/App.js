@@ -24,6 +24,7 @@ class App extends Component {
       formErrors: {email: '', password: ''},
       checkedEmail: false,
       isMailSent : false,
+      isTaskShow : false
     }
  
 
@@ -89,6 +90,9 @@ class App extends Component {
   reset = () => {console.log('wowow')}
   showTask = (event) => {
     console.log(`orange + orange`)
+    this.setState({
+      isTaskShow : true
+    })
   }
   render(){
       return(
@@ -105,6 +109,7 @@ class App extends Component {
             addNotes={this.addNotes}
             checkedPassword = {this.checkedPassword}
             invalidEmail={this.state.invalidEmail}
+            isTaskShow={this.state.isTaskShow}
             />
           </ErrorBoundary>
         </div>
