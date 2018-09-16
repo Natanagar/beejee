@@ -17,3 +17,13 @@ body {
   margin-right: auto;
   border-radius: 5px black;
 }
+.admin{
+  max-width: 10em;
+  min-height: 2em;
+  margin-left: auto;
+  margin-right: 0;
+  /*width: 400px;
+  margin-left: 25px;
+  text-align: left;*/
+  margin-bottom: 200px;
+}
