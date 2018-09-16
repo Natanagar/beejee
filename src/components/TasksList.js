@@ -22,7 +22,15 @@ class TasksList extends Component{
                             totalCount={ users.length }
                             arrayOption={ [["size", 'all', ' ']] }
                             />
-                        <Button outline color="info">Add Task</Button>
+                        <Link 
+                        to='/task'
+                        >
+                            <Button 
+                            outline color="info"
+                            >
+                            Add Task
+                            </Button>
+                        </Link>
                     </div>)
         } else {
             return(

@@ -153,12 +153,12 @@ export default class Task extends React.Component {
             <Link
               to='/'
             >
-            <Button 
-            color="primary"
-            onClick={submit}
-            >
-            Submit
-            </Button>
+              <Button 
+              color="primary"
+              onClick={submit}
+              >
+              Submit
+              </Button>
             </Link>
           </Col>
         </FormGroup>

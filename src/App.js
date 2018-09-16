@@ -180,7 +180,7 @@ class App extends Component {
     console.log(uploadFile.type)
 
     //check size or width with height!!!
-    if(uploadFile.type === 'image/jpeg' || uploadFile.type === 'image/png'){
+    if(uploadFile.type === 'image/jpeg' || uploadFile.type === 'image/png' || uploadFile.type ==='image/gif'){
       this.setState({
         checkedImage : true,
        
