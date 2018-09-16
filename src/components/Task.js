@@ -10,8 +10,8 @@ export default class Task extends React.Component {
     
    
   render() {
-    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword, invalidEmail, isTaskShow, user } = this.props;
-    
+    const { submit, reset, showTask, userHandleChange, checkedEmail, addNotes, checkedPassword, checkedImage, invalidEmail, isTaskShow, handleChangeImage, user } = this.props;
+    console.log(checkedImage)
     
     return (
       <Form className="validationForm">
@@ -78,10 +78,17 @@ export default class Task extends React.Component {
         <FormGroup row>
           <Label for="exampleFile" sm={2}>File</Label>
           <Col sm={10}>
-            <Input type="file" name="file" id="exampleFile" />
+            <Input 
+            type="file" 
+            name="file" 
+            id="exampleFile" 
+            required
+            onChange={handleChangeImage}
+            />
             <FormText color="muted">
               This file have to size no more 320х240 pixels. If you have more, your file will be cut in this size.
             </FormText>
+            {(!checkedImage) ? (<FormText color="dark">This file's type is not a jpeg/jpg/png or file's size is more 320х240 pixels</FormText>) : null}
           </Col>
         </FormGroup>
         <FormGroup row>
@@ -112,11 +119,11 @@ export default class Task extends React.Component {
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            {!checkedEmail ? <td>{invalidEmail}</td> : <td>{user.email}</td>}
+                            {!checkedEmail ? <td>{`${invalidEmail} is not valid`}</td> : <td>{user.email}</td>}
                             <td>{user.password}</td>
                             <td>Task</td>
                             <td>{user.notes}</td>
-                            <td>Image</td>
+                            <td>{user.file.name}</td>
                         </tr>
                     </tbody>
                 </Table>

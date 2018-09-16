@@ -14,15 +14,18 @@ class App extends Component {
     this.userHandleChange = this.userHandleChange.bind(this);
     this.addNotes = this.addNotes.bind(this);
     this.checkedPassword = this.checkedPassword.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this);
   }
   state = {
       user : {
         email: '',
         password: '',
         notes : '',
+        file : null
       },
       invalidEmail : '',
       checkedEmail: false,
+      checkedImage : false,
       isMailSent : false,
       isTaskShow : false
     }
@@ -38,7 +41,8 @@ class App extends Component {
               user: { 
                 email : value, 
                 password : this.state.user.password, 
-                notes : this.state.user.notes 
+                notes : this.state.user.notes,
+                file : this.state.user.file 
               }, 
               checkedEmail : true
             })
@@ -63,7 +67,8 @@ class App extends Component {
         user : {
           email : this.state.user.email,
           password : this.state.user.password,
-          notes : notes
+          notes : notes,
+          file : this.state.user.file
         }
       })
     }
@@ -76,7 +81,8 @@ class App extends Component {
         user : {
           email : this.state.user.email,
           password : pass,
-          notes : this.state.user.notes
+          notes : this.state.user.notes,
+          file : this.state.user.file
         }
       })
     }
@@ -87,11 +93,9 @@ class App extends Component {
   }
 
   submit = (event) => {
-    console.log("banana")
-
     axios({
       method: 'post',
-      url: 'https://uxcandy.com/~shapoval/test-task-backend',
+      url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Name.',
       crossDomain: true,
       headers : {
         'Content-Type': 'multipart/form-data'
@@ -100,12 +104,17 @@ class App extends Component {
       data: {
         user : this.state.user.email,
         password : this.state.user.password,
-        notes : this.state.user.notes
-      },
-      config: { headers: {'Content-Type': 'multipart/form-data' }}
+        notes : this.state.user.notes,
+        file : this.state.user.file
+        },
+      config: { headers: {'Content-Type': 'multipart/form-data' },
+        onUploadProgress : progressEvent => {
+          console.log('Upload Progress:' + Math.round(progressEvent.loaded / progressEvent.total * 100) + '%')
+        }
+      }
     }).then(function (response) {
       //handle success
-      console.log(response);
+      console.log(response.data);
   })
   .catch(function (response) {
       //handle error
@@ -118,6 +127,7 @@ class App extends Component {
         email: '',
         password: '',
         notes : '',
+        file : null,
       },
       checkedEmail: false,
       isMailSent : false,
@@ -129,7 +139,41 @@ class App extends Component {
       isTaskShow : true
     })
   }
+  handleChangeImage = (event, value) => {
+    event.preventDefault();
+    const uploadFile = event.target.files[0];
+    //check type of image and resize
+    console.log(uploadFile.type)
+    if(uploadFile.type === 'image/jpeg' || uploadFile.type === 'image/png'){
+      this.setState({
+        checkedImage : true,
+        user : {
+          email: this.state.user.email,
+          password: this.state.user.password,
+          notes : this.state.user.notes,
+          file : uploadFile
+        }
+
+      })
+
+    } else {
+      this.setState({
+        checkedImage : false
+      })
+    }
+    /*if( this.state.checkedImage ){
+      this.setState({
+        user : {
+          email: this.state.user.email,
+          password: this.state.user.password,
+          notes : this.state.user.notes,
+          file : uploadFile
+        },
+      })
+    }*/
+  }
   render(){
+    console.log(this.state.user)
       return(
         <div className="App">
           <TasksList />
@@ -140,7 +184,9 @@ class App extends Component {
             reset={this.reset}
             showTask={this.showTask}
             userHandleChange = {this.userHandleChange}
+            handleChangeImage ={this.handleChangeImage}
             checkedEmail={this.state.checkedEmail}
+            checkedImage={this.state.checkedImage}
             addNotes={this.addNotes}
             checkedPassword = {this.checkedPassword}
             invalidEmail={this.state.invalidEmail}
