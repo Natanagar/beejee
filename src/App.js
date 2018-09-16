@@ -3,7 +3,8 @@ import Task from './components/Task'
 import TasksList from './components/TasksList'
 import ErrorBoundary from './components/ErrorBoundary';
 import axios from 'axios';
-import DataUsers from './components/TaskListJson'
+import { Route } from 'react-router-dom';
+import DataUsers from './components/TaskListJson';
 import './App.css';
 
 class App extends Component {
@@ -193,26 +194,37 @@ class App extends Component {
     console.log(this.state.users)
       return(
         <div className="App">
-          <TasksList 
-          users={this.state.users}
+        <Route 
+          exact path="/"
+            render={()=>(
+              <TasksList 
+              users={this.state.users}
+              />
+              )}
           />
-          <ErrorBoundary>
-            <Task 
-            user={this.state.user}
-            submit = {this.submit}
-            reset={this.reset}
-            showTask={this.showTask}
-            userHandleChange = {this.userHandleChange}
-            handleChangeImage ={this.handleChangeImage}
-            checkedEmail={this.state.checkedEmail}
-            checkedImage={this.state.checkedImage}
-            addNotes={this.addNotes}
-            checkedPassword = {this.checkedPassword}
-            invalidEmail={this.state.invalidEmail}
-            isTaskShow={this.state.isTaskShow}
-            handleChangeTask = {this.handleChangeTask}
-            />
-          </ErrorBoundary>
+          <Route
+            path="/task"
+              render={({ history }) => (
+                <ErrorBoundary>
+                  <Task 
+                  user={this.state.user}
+                  submit = {this.submit}
+                  reset={this.reset}
+                  showTask={this.showTask}
+                  userHandleChange = {this.userHandleChange}
+                  handleChangeImage ={this.handleChangeImage}
+                  checkedEmail={this.state.checkedEmail}
+                  checkedImage={this.state.checkedImage}
+                  addNotes={this.addNotes}
+                  checkedPassword = {this.checkedPassword}
+                  invalidEmail={this.state.invalidEmail}
+                  isTaskShow={this.state.isTaskShow}
+                  handleChangeTask = {this.handleChangeTask}
+                  />
+                </ErrorBoundary>
+              )}
+          />
+          
         </div>
       )
     }
