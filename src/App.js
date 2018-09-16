@@ -231,7 +231,10 @@ class App extends Component {
   render(){
     
       return(
-        <div className="App">
+        <div 
+        className="App"
+        role="application"
+        >
         <Route 
           exact path="/"
             render={()=>(
