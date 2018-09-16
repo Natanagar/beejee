@@ -3,6 +3,7 @@ import Task from './components/Task'
 import TasksList from './components/TasksList'
 import ErrorBoundary from './components/ErrorBoundary';
 import axios from 'axios';
+import DataUsers from './components/TaskListJson'
 import './App.css';
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
         task : null,
         file : null
       },
+      users : DataUsers,
       invalidEmail : '',
       checkedEmail: {},
       checkedImage : {},
@@ -188,10 +190,12 @@ class App extends Component {
     }
   }
   render(){
-    console.log(this.state)
+    console.log(this.state.users)
       return(
         <div className="App">
-          <TasksList />
+          <TasksList 
+          users={this.state.users}
+          />
           <ErrorBoundary>
             <Task 
             user={this.state.user}
