@@ -30,7 +30,6 @@ const SearchBar = (props) => {
     }
  
 SearchBar.propTypes = {
-    value: PropTypes.string.isRequired,
     onHandleChange: PropTypes.func.isRequired
 }
 export default SearchBar;

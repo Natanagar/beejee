@@ -20,9 +20,10 @@ const UserList = (props) =>{
                             
                             <Container>
                                 <Row>
-                                <li id={user.id} 
-                                    key={user.id}
-                                    >
+                                <li 
+                                key={user.id}
+                                id={user.id} 
+                                >
                                     <Col>
                                         {`User Type - ${user.username}`}
                                     </Col>
