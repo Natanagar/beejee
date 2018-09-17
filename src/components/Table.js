@@ -11,7 +11,7 @@ const Table = (props) =>  {
         console.log(searchValue, filteredUsers)     
         return(
                 
-                <div>Hello World!
+                <div>
                     <Alert color="secondary">
                     
                         <SearchBar 
