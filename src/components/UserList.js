@@ -6,67 +6,68 @@ import PropTypes from 'prop-types';
 
 
 const UserList = (props) =>{   
-    const { users } = props
-    console.log(users)
-
-   return(
+    const { users, searchValue, filteredUsers } = props
+    console.log(searchValue, filteredUsers)
+        return(
     
-        <div>
-            <Alert color="light">
-                <ol>
-                    {users.map((user) => {
-            
-                        return (
+            <div>
+                <Alert color="light">
+                    <ol>
                         
-                        <Container>
-                            <Row>
-                            <li id={user.id} 
-                                key={user.id}
-                                >
-                                <Col>
-                                    {`User Type - ${user.username}`}
-                                </Col>
-                                <Col>
-                                    {`User email - ${user.email}`} 
-                                    
-                                </Col>
-                                <Col>
-                                    {`User Task - ${user.text}`} 
-                                    
-                                </Col>
-                                <Col>
-                                    <input 
-                                    onChange={()=>{console.log('Hura!')}} 
-                                    />
-                                </Col>
-                                <Col>
-                                    {`User Status ${user.status}`}
+                        {filteredUsers.map((user) => {
+                
+                            return (
                             
-                                </Col>
-                                <Col>
-                                        {`User path ${user.image_path}`}
+                            <Container>
+                                <Row>
+                                <li id={user.id} 
+                                    key={user.id}
+                                    >
+                                    <Col>
+                                        {`User Type - ${user.username}`}
+                                    </Col>
+                                    <Col>
+                                        {`User email - ${user.email}`} 
                                         
-                                </Col>
-                                <Col>
-                                    <span>{`Task was done`}</span> 
-                                    <input 
-                                    type="checkbox" 
-                                    onClick={()=>{console.log('Banana!')}}
-                                    />
-                                    
-                                </Col>
-            
-                                </li>   
-                            </Row>
-                        </Container>
-                        );
-                    })}
-                </ol>
-            <br/>
-                </Alert>           
-        </div>
-    )
-}
+                                    </Col>
+                                    <Col>
+                                        {`User Task - ${user.text}`} 
+                                        
+                                    </Col>
+                                    <Col>
+                                        <input 
+                                        onChange={()=>{console.log('Hura!')}} 
+                                        />
+                                    </Col>
+                                    <Col>
+                                        {`User Status ${user.status}`}
+                                
+                                    </Col>
+                                    <Col>
+                                            {`User path ${user.image_path}`}
+                                            
+                                    </Col>
+                                    <Col>
+                                        <span>{`Task was done`}</span> 
+                                        <input 
+                                        type="checkbox" 
+                                        onClick={()=>{console.log('Banana!')}}
+                                        />
+                                        
+                                    </Col>
+                
+                                    </li>   
+                                </Row>
+                            </Container>
+                            );
+                        })}
+                    </ol>
+                <br/>
+                    </Alert>           
+            </div>
+        )
+    } 
+    
 export default UserList;
 
 Alert.propTypes = {

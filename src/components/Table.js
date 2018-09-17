@@ -7,23 +7,28 @@ import UserList from './UserList'
 
 
 const Table = (props) =>  {
-    const { users } = props
-        console.log(users)     
+    const { users, searchTasks, searchValue, filteredUsers } = props
+        console.log(searchValue, filteredUsers)     
         return(
                 
                 <div>Hello World!
                     <Alert color="secondary">
                     
-                        {/*<SearchBar 
-                        value={value}
+                        <SearchBar 
                         aria-label="Filter markers form"
                         role="search"
                         label="Filter tasks"
-                        />*/}
+                        searchValue={searchValue}
+                        searchTasks={searchTasks}
+                        
+                        />
                         <UserList
                         role='menu'
                         tabIndex="0"
                         users={users}
+                        searchValue={searchValue}
+                        filteredUsers={filteredUsers}
+                        
                         
                         />
                     </Alert>

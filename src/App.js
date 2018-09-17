@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Task from './components/Task'
-import TasksList from './components/TasksList'
+import Task from './components/Task';
+import TasksList from './components/TasksList';
 import ErrorBoundary from './components/ErrorBoundary';
 import axios from 'axios';
 import { Route } from 'react-router-dom';
@@ -21,6 +21,7 @@ class App extends Component {
     this.checkEmailAndPasswordAdmin = this.checkEmailAndPasswordAdmin.bind(this);
     this.getAdminLogin = this.getAdminLogin.bind(this);
     this.getAdminPassword = this.getAdminPassword.bind(this);
+    this.searchTasks = this.searchTasks.bind(this);
   }
   state = {
       admin : {
@@ -34,6 +35,7 @@ class App extends Component {
         task : null,
         file : null
       },
+      searchValue : '',
       users : DataUsers,
       invalidEmail : '',
       checkedEmail: {},
@@ -44,6 +46,15 @@ class App extends Component {
       checkedAdminPassword : false,
     }
  
+  searchTasks = event => {
+    const inputValue = event.target.value;
+    if(inputValue!==this.state.searchValue){
+      this.setState({
+            searchValue : inputValue
+          })
+  
+    }
+  }
 
   userHandleChange = (event, value) => {
     value = event.target.value.substr(0, 30);
@@ -229,7 +240,11 @@ class App extends Component {
     console.log('ADMIN')
   }
   render(){
-    
+    const { users, admin, checkedAdminLogin, searchValue} = this.state;
+    const filteredUsers = users.filter(user => {
+        return user.text.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
+    })
+    console.log(filteredUsers);
       return(
         <div 
         className="App"
@@ -239,13 +254,16 @@ class App extends Component {
           exact path="/"
             render={()=>(
               <TasksList 
-              users={this.state.users}
-              admin={this.state.admin}
+              users={users}
+              admin={admin}
               checkEmailAndPasswordAdmin={this.checkEmailAndPasswordAdmin}
               getAdminLogin={this.getAdminLogin}
               checkedAdminLogin={this.state.checkedAdminLogin}
               checkedAdminPassword={this.state.checkedAdminPassword}
               getAdminPassword={this.getAdminPassword}
+              searchTasks={this.searchTasks}
+              searchValue={searchValue}
+              filteredUsers={filteredUsers}
               />
               )}
           />

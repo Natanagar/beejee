@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 
 
 const SearchBar = (props) => {
-       
     return(
         
             <div>
@@ -21,7 +20,7 @@ const SearchBar = (props) => {
                                 placeholder = "Search"
                                 aria-label="search text"
                                 role = "search"
-                                
+                                onChange={props.searchTasks}
                                 />
                     </InputGroup>
                     <br/>

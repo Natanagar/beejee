@@ -8,14 +8,17 @@ import PropTypes from 'prop-types';
 class TasksList extends Component{
     
     render(){
-        const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword } = this.props;
+        const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword, searchTasks, searchValue, filteredUsers } = this.props;
+        console.log(filteredUsers)
         const Headers = ["Email", "Task", "Status", "Image", "Notes" ];
-        console.log(users)
         if(checkedAdminPassword && checkedAdminLogin){
             return(
                 <div className="tablePagination">
                     <Table 
                     users={users}
+                    searchTasks={searchTasks}
+                    searchValue={searchValue}
+                    filteredUsers={filteredUsers}
                     />   
                         <Link 
                         to='/task'
