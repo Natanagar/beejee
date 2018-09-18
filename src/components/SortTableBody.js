@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
     const SortTableBody = (props) => {
-     const { tasks } = props   
+     const { tasks, sendDatasFromAdmin } = props   
     
         return(
         <div>    
@@ -12,7 +13,15 @@ import { Button } from 'reactstrap';
                 </tr>)}
         
           </tbody>
-          <Button outline color="info">Send to server</Button>
+        <Link
+        exact to='/'>
+            <Button 
+            outline color="info"
+            onClick={sendDatasFromAdmin}
+            >
+            Send to server
+            </Button>
+        </Link>
         </div>
         )
     

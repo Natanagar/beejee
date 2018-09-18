@@ -45,7 +45,7 @@ class SortTable extends Component {
         columns : TABLE_COLUMNS
     }
     componentDidMount() {
-        const { tasks } = this.props;
+        const { tasks, sendDatasFromAdmin } = this.props;
         this.setState({ tasks })
     }
     
@@ -57,15 +57,16 @@ class SortTable extends Component {
 
     render(){
     console.log(this.props)
-       const { users  } = this.props
+       const { users, sendDatasFromAdmin } = this.props
        const { columns } = this.state
         return(
-            <div>
+            <div className="sort-table">
                 <SortTableHeader 
-                columns={ columns }
+                columns={columns}
                 />
                 <SortTableBody 
                 tasks={users}
+                sendDatasFromAdmin={sendDatasFromAdmin}
                 />
             </div>
         )
