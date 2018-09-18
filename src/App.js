@@ -19,11 +19,13 @@ class App extends Component {
     this.checkedPassword = this.checkedPassword.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleChangeTask = this.handleChangeTask.bind(this);
-    this.checkEmailAndPasswordAdmin = this.checkEmailAndPasswordAdmin.bind(this);
     this.getAdminLogin = this.getAdminLogin.bind(this);
     this.getAdminPassword = this.getAdminPassword.bind(this);
     this.searchTasks = this.searchTasks.bind(this);
     this.getDatasFromServer = this.getDatasFromServer.bind(this);
+    this.sendDatasFromAdmin = this.sendDatasFromAdmin.bind(this);
+    this.getChangedTasksFromAdmin = this.getChangedTasksFromAdmin.bind(this)
+
   }
   state = {
       admin : {
@@ -37,6 +39,7 @@ class App extends Component {
         task : null,
         file : null
       },
+      changedTasks : [],
       searchValue : '',
       users : DataUsers,
       tasks : [],
@@ -270,16 +273,57 @@ class App extends Component {
       })
     } 
   }
-  checkEmailAndPasswordAdmin = event => {
-    console.log('ADMIN')
+
+  getChangedTasksFromAdmin = event => {
+    const changedInput = event.target.value;
+    console.log(changedInput)
+    if(changedInput !== this.state.changedTasks){
+      this.setState({
+        changedTasks : changedInput
+      })
+    }
+    this.sendDatasFromAdmin();
   }
+
+
+  sendDatasFromAdmin = (event) => {
+    console.log('AXIOS')
+      axios({
+        method: 'post',
+        url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Agarkova.',
+        crossDomain: true,
+        headers : {
+          'Content-Type': 'multipart/form-data'
+        },
+        processData: false,
+        data: {
+          user : this.state.admin.login,
+          password : this.state.admin.password,
+          notes : this.state.user.notes,
+          task : this.state.changedTasks,
+          file : this.state.user.file
+          },
+        config: { headers: {'Content-Type': 'multipart/form-data' },
+          onUploadProgress : progressEvent => {
+            console.log('Upload Progress:' + Math.round(progressEvent.loaded / progressEvent.total * 100) + '%')
+          }
+        }
+      }).then(function (response) {
+        //handle success
+        console.log(response.data);
+    })
+    .catch(function (response) {
+        //handle error
+        console.log(response);
+    });
+  }
+
   render(){
-    const { users, admin, checkedAdminLogin, searchValue} = this.state;
+    const { users, admin, checkedAdminLogin, searchValue, tasks } = this.state;
     const filteredUsers = users.filter(user => {
         return user.text.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
     })
-    console.log(filteredUsers);
-    this.getDatasFromServer();
+    
       return(
         <div 
         className="App"
@@ -333,8 +377,11 @@ class App extends Component {
               render={({ history }) => (
                 <ErrorBoundary>
                   <SortTable
-                    //getDatasFromServer={getDatasFromServer} 
+                    //getDatasFromServer={getDatasFromServer}
+                    sendDatasFromAdmin={this.sendDatasFromAdmin}
                     users={users}
+                    getChangedTasksFromAdmin={this.getChangedTasksFromAdmin}
+                    
                     />
                 </ErrorBoundary>
               )}
