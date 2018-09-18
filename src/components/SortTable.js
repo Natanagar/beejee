@@ -1,9 +1,37 @@
 import React, { Component } from 'react';
 import DataUsers from './TaskListJson';
 import axios from 'axios';
-import SortTableHeader from './SortTableHeader'
+import SortTableHeader from './SortTableHeader';
+import SortTableBody from './SortTableBody'
+const TABLE_COLUMNS = [
+    {
+        label: 'ID',
+        sort: 'default',
+    }, 
+    {
+        label: 'User Name',
+        sort: 'default',
+    }, 
+    {
+        label: 'Email',
+        sort: 'default',
+    },
+    {
+        label: 'Text',
+        sort: 'default',
+    }, 
+    {
+        label: 'Status',
+        sort: 'default',
+    }, 
+    {
+        label: 'image_path',
+        sort: 'default',
+    },
+
+];
 class SortTable extends Component {
-    /*static propTypes = {
+   /* static propTypes = {
         name: React.PropTypes.string,
     };*/
     
@@ -14,7 +42,7 @@ class SortTable extends Component {
     }
     state={
         tasks : DataUsers,
-        columns : []
+        columns : TABLE_COLUMNS
     }
     componentDidMount() {
         const { tasks } = this.props;
@@ -28,11 +56,17 @@ class SortTable extends Component {
     
 
     render(){
-       console.log(this.props.getDatasFromServer)
+    console.log(this.props)
+       const { users  } = this.props
+       const { columns } = this.state
         return(
             <div>
-                <SortTableHeader />
-                Hello World
+                <SortTableHeader 
+                columns={ columns }
+                />
+                <SortTableBody 
+                tasks={users}
+                />
             </div>
         )
     }

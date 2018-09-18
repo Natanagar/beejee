@@ -5,6 +5,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import axios from 'axios';
 import { Route } from 'react-router-dom';
 import DataUsers from './components/TaskListJson';
+import SortTable from './components/SortTable';
 import './App.css';
 
 class App extends Component {
@@ -38,6 +39,7 @@ class App extends Component {
       },
       searchValue : '',
       users : DataUsers,
+      tasks : [],
       invalidEmail : '',
       checkedEmail: {},
       checkedImage : {},
@@ -151,17 +153,35 @@ class App extends Component {
       console.log(response);
   });
   }
-  getDatasFromServer =() => {
+
+  getDatasFromServer = () => {
     axios({
         method:'get',
-        url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Name.'
+        url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Agarkova.'
       })
-        .then((response) => {
-          console.log(response.data)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+            return response;
+        } else {
+            let error = new Error(response.statusText);
+            error.response = response;
+            throw error
+            alert (`Error loading pics ${error}`);
+        }
+      })
+      .then((response) => {
+        if (response.headers['content-type'] !== 'application/json') {
+            let error = new Error('This is uncorrect response from server');
+            error.response = response;
+            throw error
+            alert ('This is uncorrect response from server')   
+        }
+        return response.data;
+      })
+      .then(json=>{
+        console.log(json)
+      })
+            
 }  
 
   reset = (event) => {
@@ -259,6 +279,7 @@ class App extends Component {
         return user.text.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
     })
     console.log(filteredUsers);
+    this.getDatasFromServer();
       return(
         <div 
         className="App"
@@ -278,6 +299,7 @@ class App extends Component {
               searchTasks={this.searchTasks}
               searchValue={searchValue}
               filteredUsers={filteredUsers}
+              
 
               />
               )}
@@ -301,7 +323,19 @@ class App extends Component {
                   isTaskShow={this.state.isTaskShow}
                   handleChangeTask = {this.handleChangeTask}
                   getDatasFromServer={this.getDatasFromServer}
+                  users={users}
                   />
+                </ErrorBoundary>
+              )}
+          />
+          <Route
+            path="/admin"
+              render={({ history }) => (
+                <ErrorBoundary>
+                  <SortTable
+                    //getDatasFromServer={getDatasFromServer} 
+                    users={users}
+                    />
                 </ErrorBoundary>
               )}
           />

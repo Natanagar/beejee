@@ -21,7 +21,7 @@ class TasksList extends Component{
                     filteredUsers={filteredUsers}
                     />   
                         <Link 
-                        to='/task'
+                        to='/admin'
                         >
                              <Button 
                             outline color="primary"
