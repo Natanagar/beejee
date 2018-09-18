@@ -22,6 +22,7 @@ class App extends Component {
     this.getAdminLogin = this.getAdminLogin.bind(this);
     this.getAdminPassword = this.getAdminPassword.bind(this);
     this.searchTasks = this.searchTasks.bind(this);
+    this.getDatasFromServer = this.getDatasFromServer.bind(this);
   }
   state = {
       admin : {
@@ -150,6 +151,19 @@ class App extends Component {
       console.log(response);
   });
   }
+  getDatasFromServer =() => {
+    axios({
+        method:'get',
+        url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Name.'
+      })
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}  
+
   reset = (event) => {
     this.setState({
       user : {
@@ -264,6 +278,7 @@ class App extends Component {
               searchTasks={this.searchTasks}
               searchValue={searchValue}
               filteredUsers={filteredUsers}
+
               />
               )}
           />
@@ -285,6 +300,7 @@ class App extends Component {
                   invalidEmail={this.state.invalidEmail}
                   isTaskShow={this.state.isTaskShow}
                   handleChangeTask = {this.handleChangeTask}
+                  getDatasFromServer={this.getDatasFromServer}
                   />
                 </ErrorBoundary>
               )}
