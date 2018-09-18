@@ -9,7 +9,6 @@ class TasksList extends Component{
     
     render(){
         const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword, searchTasks, searchValue, filteredUsers } = this.props;
-        console.log(filteredUsers)
         const Headers = ["Email", "Task", "Status", "Image", "Notes" ];
         if(checkedAdminPassword && checkedAdminLogin){
             return(

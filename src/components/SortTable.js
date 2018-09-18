@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import DataUsers from './TaskListJson';
-import axios from 'axios';
 import SortTableHeader from './SortTableHeader';
-import SortTableBody from './SortTableBody'
+import SortTableBody from './SortTableBody';
+import { Link } from 'react-router-dom';
+import { block } from 'bem-cn';
+
+
 const TABLE_COLUMNS = [
     {
         label: 'ID',
@@ -30,16 +33,13 @@ const TABLE_COLUMNS = [
     },
 
 ];
+//const cn = require('bem-cn')('table');
 class SortTable extends Component {
    /* static propTypes = {
         name: React.PropTypes.string,
     };*/
     
-   
 
-    constructor(props){
-        super(props)
-    }
     state={
         tasks : DataUsers,
         columns : TABLE_COLUMNS
@@ -53,20 +53,24 @@ class SortTable extends Component {
         const { tasks } = nextProps;
         this.setState({ tasks })
     }*/
+    sortTableHandler = () => {
+        console.log("BANANA")
+    }
     
 
     render(){
-    console.log(this.props)
-       const { users, sendDatasFromAdmin } = this.props
+    
+       const { users, addChangedDatasFromAdmin, getChangedTasksFromAdmin } = this.props
        const { columns } = this.state
         return(
             <div className="sort-table">
                 <SortTableHeader 
                 columns={columns}
+                onClick={this.sortTableHandler}
                 />
                 <SortTableBody 
                 tasks={users}
-                sendDatasFromAdmin={sendDatasFromAdmin}
+                getChangedTasksFromAdmin={getChangedTasksFromAdmin}
                 />
             </div>
         )

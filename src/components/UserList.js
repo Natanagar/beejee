@@ -6,8 +6,7 @@ import PropTypes from 'prop-types';
 
 
 const UserList = (props) =>{   
-    const { users, searchValue, filteredUsers } = props
-    console.log(searchValue, filteredUsers)
+    const { searchValue, filteredUsers } = props
         return(
     
             <div>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Alert, Col, Button, Form, FormGroup, Label, Input, FormText, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,7 +10,7 @@ export default class Task extends React.Component {
    
   render() {
     const { submit, reset, userHandleChange, checkedEmail, addNotes, checkedPassword, 
-      checkedImage, invalidEmail, isTaskShow, handleChangeImage, handleChangeTask, users, user } = this.props;
+      checkedImage, invalidEmail, isTaskShow, handleChangeImage, handleChangeTask, user } = this.props;
       
    
     
