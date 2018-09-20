@@ -34,5 +34,18 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCE2THzU_GSc9xWOT-h6gDXm41QEr_tCDc",
+        authDomain: "todo-beejee.firebaseapp.com",
+        databaseURL: "https://todo-beejee.firebaseio.com",
+        projectId: "todo-beejee",
+        storageBucket: "todo-beejee.appspot.com",
+        messagingSenderId: "138840224069"
+      };
+      firebase.initializeApp(config);
+    </script>
   </body>
 </html>
