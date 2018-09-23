@@ -4,21 +4,15 @@ import { Input } from 'reactstrap';
 
 const SortTableHeader = (props) => {
  const { columns } = props
+ 
     return(
-        <thead>
+      <thead>
           <tr>
-            {columns.map((element, index) =>
-              <th key={index}>
-                <Input
-                type="text"
-                defaultValue={element.label}
-                >
-                </Input>
-                
-              </th>
-            )}
+            { columns.map(item => (
+              <th>{item.label}</th>
+            ))}
           </tr>
-        </thead>
+      </thead>
       )
 }
 

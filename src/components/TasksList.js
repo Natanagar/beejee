@@ -4,31 +4,41 @@ import { TablePagination } from 'react-pagination-table';
 import { Link } from 'react-router-dom';
 import Table from './Table';
 import PropTypes from 'prop-types';
+import SortTable from './SortTable';
 
 class TasksList extends Component{
     
     render(){
         const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword, searchTasks, searchValue, 
-            filteredUsers, getDatasFromServer } = this.props;
+            filteredUsers, getDatasFromServer, columns } = this.props;
+        console.log(columns)
         getDatasFromServer();
+      
         const Headers = ["Email", "Task", "Status", "Image", "Notes" ];
         if(checkedAdminPassword && checkedAdminLogin){
             return(
                 <div className="tablePagination">
-                    <Table 
+                    <SortTable
+                    columns={columns}
+                    sendDatasFromAdmin={this.sendDatasFromAdmin}
+                    users={users}
+                    getChangedTasksFromAdmin={this.getChangedTasksFromAdmin}
+                    
+                    />
+                    {/*<Table 
                     users={users}
                     searchTasks={searchTasks}
                     searchValue={searchValue}
                     filteredUsers={filteredUsers}
-                    />   
+                    /> */}  
                         <Link 
                         to='/task'
                         >
-                             <Button 
+                            {/*} <Button 
                             outline color="primary"
                             >
                             Send
-                            </Button>
+                            </Button>*/}
                             <Button 
                             outline color="info"
                             >
@@ -71,7 +81,13 @@ class TasksList extends Component{
                     </Button>
                 </Form>
             <div>
-                <TablePagination
+                    <SortTable
+                    sendDatasFromAdmin={this.sendDatasFromAdmin}
+                    users={users}
+                    getChangedTasksFromAdmin={this.getChangedTasksFromAdmin}
+                    columns={columns}
+                    />
+                {/*<TablePagination
                     title="Todo application"
                     subTitle={`We have only ${users.length} tasks`}
                     headers={ Headers }
@@ -80,7 +96,7 @@ class TasksList extends Component{
                     perPageItemCount={ 3 }
                     totalCount={ users.length }
                     arrayOption={ [["size", 'all', ' ']] }
-                />
+                />*/}
             </div>
             <Link
                 to='/task' 

@@ -4,7 +4,7 @@ import TasksList from './components/TasksList';
 import ErrorBoundary from './components/ErrorBoundary';
 import axios from 'axios';
 import { Route } from 'react-router-dom';
-import DataUsers from './components/TaskListJson';
+//import DataUsers from './components/TaskListJson';
 import SortTable from './components/SortTable';
 import './App.css';
 
@@ -32,6 +32,32 @@ class App extends Component {
         login : 'admin',
         password : "123"
       },
+      columns : [
+        {
+            label: 'ID',
+            sort: 'default',
+        }, 
+        {
+            label: 'User Name',
+            sort: 'default',
+        }, 
+        {
+            label: 'Email',
+            sort: 'default',
+        },
+        {
+            label: 'Text',
+            sort: 'default',
+        }, 
+        {
+            label: 'Status',
+            sort: 'default',
+        }, 
+        {
+            label: 'image_path',
+            sort: 'default',
+        },
+    ],
       user : {
         email: '',
         password: '',
@@ -41,7 +67,7 @@ class App extends Component {
       },
       changedTasks : [],
       searchValue : '',
-      users : DataUsers,
+      users : [],
       tasks : [],
       invalidEmail : '',
       checkedEmail: {},
@@ -164,13 +190,15 @@ class App extends Component {
   getDatasFromServer = event => {
       axios({
         method:'get',
-        url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Name',
+        url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Agarkova',
       })
       .then((response) => {
-        console.log(response.data)
+        let tasksFromServer = response.data.message.tasks
+        if(tasksFromServer !== this.state.users){
+          this.setState({ users : tasksFromServer })
+        }
       })
       .catch(error => console.log(error))
-            
 }  
 
   reset = (event) => {
@@ -305,10 +333,11 @@ class App extends Component {
   }
 
   render(){
-    const { users, admin, checkedAdminLogin, searchValue, tasks } = this.state;
-    const filteredUsers = users.filter(user => {
-        return user.text.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
-    })
+    const { users, admin, checkedAdminLogin, searchValue, tasks, columns } = this.state;
+    
+    //const filteredUsers = users.filter(user => {
+       // return user.text.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
+    //})
     
       return(
         <div 
@@ -318,7 +347,8 @@ class App extends Component {
         <Route 
           exact path="/"
             render={()=>(
-              <TasksList 
+              <TasksList
+              columns={columns}
               users={users}
               admin={admin}
               checkEmailAndPasswordAdmin={this.checkEmailAndPasswordAdmin}
@@ -328,7 +358,7 @@ class App extends Component {
               getAdminPassword={this.getAdminPassword}
               searchTasks={this.searchTasks}
               searchValue={searchValue}
-              filteredUsers={filteredUsers}
+              //filteredUsers={filteredUsers}
               getDatasFromServer={this.getDatasFromServer}
               
 
@@ -359,7 +389,7 @@ class App extends Component {
                 </ErrorBoundary>
               )}
           />
-          <Route
+          {/*<Route
             path="/admin"
               render={({ history }) => (
                 <ErrorBoundary>
@@ -372,7 +402,7 @@ class App extends Component {
                     />
                 </ErrorBoundary>
               )}
-              />
+              />*/}
           
         </div>
       )

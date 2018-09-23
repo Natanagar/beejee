@@ -1,77 +1,42 @@
 import React, { Component } from 'react';
-import DataUsers from './TaskListJson';
 import SortTableHeader from './SortTableHeader';
-import SortTableBody from './SortTableBody';
 import { Link } from 'react-router-dom';
-import { block } from 'bem-cn';
+import { Table, Button } from 'reactstrap';
 
-
-const TABLE_COLUMNS = [
-    {
-        label: 'ID',
-        sort: 'default',
-    }, 
-    {
-        label: 'User Name',
-        sort: 'default',
-    }, 
-    {
-        label: 'Email',
-        sort: 'default',
-    },
-    {
-        label: 'Text',
-        sort: 'default',
-    }, 
-    {
-        label: 'Status',
-        sort: 'default',
-    }, 
-    {
-        label: 'image_path',
-        sort: 'default',
-    },
-
-];
-//const cn = require('bem-cn')('table');
 class SortTable extends Component {
    /* static propTypes = {
         name: React.PropTypes.string,
     };*/
     
-
-    state={
-        tasks : DataUsers,
-        columns : TABLE_COLUMNS
-    }
-    componentDidMount() {
-        const { tasks, sendDatasFromAdmin } = this.props;
-        this.setState({ tasks })
-    }
-    
-    /*shouldComponentUpdate(nextProps) {
-        const { tasks } = nextProps;
-        this.setState({ tasks })
-    }*/
-    sortTableHandler = () => {
-        console.log("BANANA")
-    }
-    
-
     render(){
     
-       const { users, addChangedDatasFromAdmin, getChangedTasksFromAdmin } = this.props
-       const { columns } = this.state
+       const { users, addChangedDatasFromAdmin, getChangedTasksFromAdmin, columns, sendDatasFromAdmin } = this.props
+        console.log(users)
+
         return(
+    
             <div className="sort-table">
-                <SortTableHeader 
-                columns={columns}
-                onClick={this.sortTableHandler}
-                />
-                <SortTableBody 
-                tasks={users}
-                getChangedTasksFromAdmin={getChangedTasksFromAdmin}
-                />
+                <Table>
+                    <SortTableHeader
+                    columns={columns} 
+                    />
+                    <tbody>
+                    {users.map(element => 
+                        <tr>{Object.values(element).map(el =><td>{el}</td>)}
+                        </tr>)}
+                    
+                    </tbody>
+                </Table>
+                <Link
+                    exact to='/'>
+                    <Button
+                    className="sendToServer"
+                    outline color="info"
+                    onClick={sendDatasFromAdmin}
+                    >
+                    Send to server
+                    </Button>
+                </Link>
             </div>
         )
     }

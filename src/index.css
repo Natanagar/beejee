@@ -32,10 +32,10 @@ div.tablePagination{
 }
 div.sort-table{
   width: 80%;
-  margin: 50px auto 150px auto;
+  margin: 50px auto 50px auto;
 }
 .sendToServer{
-  margin-top: 150px;
+  margin-top: 10px;
 }
 .sorting-block{
   position: relative;
@@ -81,3 +81,4 @@ div.sort-table{
     border-width: 5px 5px 0 5px;
     border-color: #eee transparent transparent transparent;
   }
+  
