@@ -8,7 +8,9 @@ import PropTypes from 'prop-types';
 class TasksList extends Component{
     
     render(){
-        const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword, searchTasks, searchValue, filteredUsers } = this.props;
+        const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword, searchTasks, searchValue, 
+            filteredUsers, getDatasFromServer } = this.props;
+        getDatasFromServer();
         const Headers = ["Email", "Task", "Status", "Image", "Notes" ];
         if(checkedAdminPassword && checkedAdminLogin){
             return(
@@ -20,7 +22,7 @@ class TasksList extends Component{
                     filteredUsers={filteredUsers}
                     />   
                         <Link 
-                        to='/admin'
+                        to='/task'
                         >
                              <Button 
                             outline color="primary"

@@ -127,21 +127,25 @@ class App extends Component {
   }
 
   submit = (event) => {
+    let formData = new FormData();
+      formData.append('username', 'User');
+      formData.append('email', this.state.user.email);
+      formData.append('password', this.state.user.password);
+      formData.append('text', this.state.user.notes);
+      formData.append('task', this.state.user.task);
+      formData.append('image', this.state.user.file);
+
+    console.log(formData);
+    console.log(this.state)
     axios({
       method: 'post',
-      url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Name.',
+      url: 'https://uxcandy.com/~shapoval/test-task-backend/create?developer=Agarkova',
       crossDomain: true,
       headers : {
         'Content-Type': 'multipart/form-data'
       },
       processData: false,
-      data: {
-        user : this.state.user.email,
-        password : this.state.user.password,
-        notes : this.state.user.notes,
-        task : this.state.user.task,
-        file : this.state.user.file
-        },
+      data: formData,
       config: { headers: {'Content-Type': 'multipart/form-data' },
         onUploadProgress : progressEvent => {
           console.log('Upload Progress:' + Math.round(progressEvent.loaded / progressEvent.total * 100) + '%')
@@ -157,33 +161,15 @@ class App extends Component {
   });
   }
 
-  getDatasFromServer = () => {
-    axios({
+  getDatasFromServer = event => {
+      axios({
         method:'get',
-        url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Agarkova.'
+        url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Name',
       })
       .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-            return response;
-        } else {
-            let error = new Error(response.statusText);
-            error.response = response;
-            throw error
-            alert (`Error loading pics ${error}`);
-        }
+        console.log(response.data)
       })
-      .then((response) => {
-        if (response.headers['content-type'] !== 'application/json') {
-            let error = new Error('This is uncorrect response from server');
-            error.response = response;
-            throw error
-            alert ('This is uncorrect response from server')   
-        }
-        return response.data;
-      })
-      .then(json=>{
-        console.log(json)
-      })
+      .catch(error => console.log(error))
             
 }  
 
@@ -290,14 +276,14 @@ class App extends Component {
     console.log('AXIOS')
       axios({
         method: 'post',
-        url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Agarkova.',
+        url: 'https://uxcandy.com/~shapoval/test-task-backend/create?developer=Agarkova',
         crossDomain: true,
         headers : {
           'Content-Type': 'multipart/form-data'
         },
         processData: false,
         data: {
-          user : this.state.admin.login,
+          username : this.state.admin.login,
           password : this.state.admin.password,
           notes : this.state.user.notes,
           task : this.state.changedTasks,
@@ -343,6 +329,7 @@ class App extends Component {
               searchTasks={this.searchTasks}
               searchValue={searchValue}
               filteredUsers={filteredUsers}
+              getDatasFromServer={this.getDatasFromServer}
               
 
               />
@@ -385,7 +372,7 @@ class App extends Component {
                     />
                 </ErrorBoundary>
               )}
-          />
+              />
           
         </div>
       )
