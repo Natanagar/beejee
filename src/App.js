@@ -332,13 +332,30 @@ class App extends Component {
         console.log(response);
     });
   }
-  sortingTable = event => {
-    console.log(event.target)
+  compareBy(key) {
+    return function (a, b) {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    };
+  }
+  sortingTable = key => {
+    console.log(this.state.users)
+    let sortedArray = Array.from(this.state.users).sort(this.compareBy(key));
+    console.log(sortedArray)
+    this.setState({
+      users : sortedArray
+    })
+
+  }
+
+  componentDidMount(){
+    this.getDatasFromServer();   
   }
 
   render(){
-    const { users, admin, checkedAdminLogin, searchValue, tasks, columns } = this.state;
-    
+    const { users, admin, checkedAdminLogin, searchValue, columns } = this.state;
+    console.log(users)
     //const filteredUsers = users.filter(user => {
        // return user.text.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
     //})
@@ -394,20 +411,6 @@ class App extends Component {
                 </ErrorBoundary>
               )}
           />
-          {/*<Route
-            path="/admin"
-              render={({ history }) => (
-                <ErrorBoundary>
-                  <SortTable
-                    //getDatasFromServer={getDatasFromServer}
-                    sendDatasFromAdmin={this.sendDatasFromAdmin}
-                    users={users}
-                    getChangedTasksFromAdmin={this.getChangedTasksFromAdmin}
-                    
-                    />
-                </ErrorBoundary>
-              )}
-              />*/}
           
         </div>
       )

@@ -2,21 +2,15 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Input, FormText } from 'reactstrap';
 import { TablePagination } from 'react-pagination-table';
 import { Link } from 'react-router-dom';
-import Table from './Table';
 import PropTypes from 'prop-types';
 import SortTable from './SortTable';
 
 class TasksList extends Component{
-    componentDidMount(){
-        this.props.getDatasFromServer();   
-    }
     render(){
-        const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword, searchTasks, searchValue, 
-            filteredUsers, getDatasFromServer, columns, sortingTable } = this.props;
+        const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword, 
+            filteredUsers, columns, sortingTable } = this.props;
         console.log(columns)
       
-      
-        const Headers = ["Email", "Task", "Status", "Image", "Notes" ];
         if(checkedAdminPassword && checkedAdminLogin){
             return(
                 <div className="tablePagination">
@@ -84,16 +78,7 @@ class TasksList extends Component{
                     getChangedTasksFromAdmin={this.getChangedTasksFromAdmin}
                     columns={columns}
                     />
-                {/*<TablePagination
-                    title="Todo application"
-                    subTitle={`We have only ${users.length} tasks`}
-                    headers={ Headers }
-                    data={ users }
-                    columns="email.text.status.image_path.notes"
-                    perPageItemCount={ 3 }
-                    totalCount={ users.length }
-                    arrayOption={ [["size", 'all', ' ']] }
-                />*/}
+            
             </div>
             <Link
                 to='/task' 

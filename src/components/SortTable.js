@@ -22,9 +22,13 @@ class SortTable extends Component {
                     sortingTable={sortingTable} 
                     />
                     <tbody>
-                    {users.map(element => 
-                        <tr>{Object.values(element).map(el =>
-                        <td>{el}</td>
+                    {users.map((element,i) => 
+                        <tr
+                        key={i}
+                        >{Object.values(element).map(el =>
+                        <td
+                        key={el}
+                        >{el}</td>
                         )}
                     </tr>)}
                     

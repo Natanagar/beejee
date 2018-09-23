@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 
 const SortTableHeader = (props) => {
