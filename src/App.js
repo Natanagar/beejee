@@ -25,6 +25,7 @@ class App extends Component {
     this.getDatasFromServer = this.getDatasFromServer.bind(this);
     this.sendDatasFromAdmin = this.sendDatasFromAdmin.bind(this);
     this.getChangedTasksFromAdmin = this.getChangedTasksFromAdmin.bind(this)
+    this.sortingTable = this.sortingTable.bind(this)
 
   }
   state = {
@@ -331,6 +332,9 @@ class App extends Component {
         console.log(response);
     });
   }
+  sortingTable = event => {
+    console.log(event.target)
+  }
 
   render(){
     const { users, admin, checkedAdminLogin, searchValue, tasks, columns } = this.state;
@@ -360,6 +364,7 @@ class App extends Component {
               searchValue={searchValue}
               //filteredUsers={filteredUsers}
               getDatasFromServer={this.getDatasFromServer}
+              sortingTable={this.sortingTable}
               
 
               />

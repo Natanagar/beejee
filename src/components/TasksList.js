@@ -7,12 +7,14 @@ import PropTypes from 'prop-types';
 import SortTable from './SortTable';
 
 class TasksList extends Component{
-    
+    componentDidMount(){
+        this.props.getDatasFromServer();   
+    }
     render(){
         const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword, searchTasks, searchValue, 
-            filteredUsers, getDatasFromServer, columns } = this.props;
+            filteredUsers, getDatasFromServer, columns, sortingTable } = this.props;
         console.log(columns)
-        getDatasFromServer();
+      
       
         const Headers = ["Email", "Task", "Status", "Image", "Notes" ];
         if(checkedAdminPassword && checkedAdminLogin){
@@ -23,14 +25,9 @@ class TasksList extends Component{
                     sendDatasFromAdmin={this.sendDatasFromAdmin}
                     users={users}
                     getChangedTasksFromAdmin={this.getChangedTasksFromAdmin}
+                    sortingTable={sortingTable}
                     
                     />
-                    {/*<Table 
-                    users={users}
-                    searchTasks={searchTasks}
-                    searchValue={searchValue}
-                    filteredUsers={filteredUsers}
-                    /> */}  
                         <Link 
                         to='/task'
                         >

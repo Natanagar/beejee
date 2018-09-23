@@ -10,7 +10,7 @@ class SortTable extends Component {
     
     render(){
     
-       const { users, addChangedDatasFromAdmin, getChangedTasksFromAdmin, columns, sendDatasFromAdmin } = this.props
+       const { users, addChangedDatasFromAdmin, getChangedTasksFromAdmin, columns, sendDatasFromAdmin, sortingTable } = this.props
         console.log(users)
 
         return(
@@ -18,12 +18,15 @@ class SortTable extends Component {
             <div className="sort-table">
                 <Table>
                     <SortTableHeader
-                    columns={columns} 
+                    columns={columns}
+                    sortingTable={sortingTable} 
                     />
                     <tbody>
                     {users.map(element => 
-                        <tr>{Object.values(element).map(el =><td>{el}</td>)}
-                        </tr>)}
+                        <tr>{Object.values(element).map(el =>
+                        <td>{el}</td>
+                        )}
+                    </tr>)}
                     
                     </tbody>
                 </Table>
