@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import SortTableHeader from './SortTableHeader';
 import { Link } from 'react-router-dom';
 import { Table, Button } from 'reactstrap';
+import Pagination from "react-js-pagination";
+import "~bootstrap/less/bootstrap";
 
 class SortTable extends Component {
    /* static propTypes = {
@@ -33,6 +35,13 @@ class SortTable extends Component {
                     
                     </tbody>
                 </Table>
+                <Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={10}
+                    totalItemsCount={450}
+                    pageRangeDisplayed={5}
+                    onChange={this.handlePageChange}
+                    />
                 <Link
                     exact to='/'>
                     <Button

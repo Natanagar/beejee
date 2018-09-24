@@ -4,6 +4,8 @@ import { TablePagination } from 'react-pagination-table';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SortTable from './SortTable';
+import Pagination from "react-js-pagination";
+import "~bootstrap/less/bootstrap";
 
 class TasksList extends Component{
     render(){
@@ -21,6 +23,13 @@ class TasksList extends Component{
                     getChangedTasksFromAdmin={this.getChangedTasksFromAdmin}
                     sortingTable={sortingTable}
                     
+                    />
+                    <Pagination
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={10}
+                    totalItemsCount={450}
+                    pageRangeDisplayed={5}
+                    onChange={this.handlePageChange}
                     />
                         <Link 
                         to='/task'

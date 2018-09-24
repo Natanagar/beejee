@@ -6,6 +6,8 @@ import axios from 'axios';
 import { Route } from 'react-router-dom';
 //import DataUsers from './components/TaskListJson';
 import SortTable from './components/SortTable';
+import Pagination from "react-js-pagination";
+import "~bootstrap/less/bootstrap";
 import sortMultidimensionalArrayFunc from 'sort-multidimensional-array-func';
 import './App.css';
 
@@ -27,6 +29,7 @@ class App extends Component {
     this.sendDatasFromAdmin = this.sendDatasFromAdmin.bind(this);
     this.getChangedTasksFromAdmin = this.getChangedTasksFromAdmin.bind(this)
     this.sortingTable = this.sortingTable.bind(this)
+    this.handlePageChange = this.handlePageChange.bind(this)
 
   }
   state = {
@@ -67,6 +70,7 @@ class App extends Component {
         task : null,
         file : null
       },
+      activePage: 0,
       changedTasks : [],
       searchValue : '',
       users : [],
@@ -361,7 +365,11 @@ class App extends Component {
       })
 
     }
-  
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({activePage: pageNumber});
+  }
+
   componentDidMount(){
     this.getDatasFromServer();   
   }
