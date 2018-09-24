@@ -11,7 +11,6 @@ class SortTable extends Component {
     render(){
     
        const { users, addChangedDatasFromAdmin, getChangedTasksFromAdmin, columns, sendDatasFromAdmin, sortingTable } = this.props
-        console.log(users)
 
         return(
     

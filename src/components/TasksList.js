@@ -9,7 +9,7 @@ class TasksList extends Component{
     render(){
         const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword, 
             filteredUsers, columns, sortingTable } = this.props;
-        console.log(columns)
+        
       
         if(checkedAdminPassword && checkedAdminLogin){
             return(
@@ -77,6 +77,7 @@ class TasksList extends Component{
                     users={users}
                     getChangedTasksFromAdmin={this.getChangedTasksFromAdmin}
                     columns={columns}
+                    sortingTable={sortingTable}
                     />
             
             </div>

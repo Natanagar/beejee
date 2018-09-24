@@ -340,8 +340,7 @@ class App extends Component {
     };
   }
   sortingTable = key => {
-    console.log(this.state.users)
-    let sortedArray = Array.from(this.state.users).sort(this.compareBy(key));
+    let sortedArray = this.state.users.sort(this.compareBy(key))
     console.log(sortedArray)
     this.setState({
       users : sortedArray
@@ -355,7 +354,7 @@ class App extends Component {
 
   render(){
     const { users, admin, checkedAdminLogin, searchValue, columns } = this.state;
-    console.log(users)
+  
     //const filteredUsers = users.filter(user => {
        // return user.text.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
     //})
