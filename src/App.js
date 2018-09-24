@@ -334,16 +334,27 @@ class App extends Component {
     });
   }
   compareBy(key) {
-    return function (a, b) {
-      if (a[key] < b[key]) return -1;
-      if (a[key] > b[key]) return 1;
-      return 0;
+    return function (a, b, order="asc") {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)){
+        return 0;
+      }
+      const varA = (typeof a[key] === 'string') ?  a[key].toUpperCase() : a[key];
+      const varB = (typeof b[key] === 'string') ?  b[key].toUpperCase() : b[key];
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return (
+        (order == 'desc') ? (comparison * -1) : comparison
+      );
     };
   }
  
 
   sortingTable = (key) => {
-     let sortedArray = this.state.users.sort(this.compareBy(key))
+     let sortedArray = this.state.users.slice(0).sort(this.compareBy(key))
       console.log(sortedArray)
       this.setState({
         users : sortedArray
