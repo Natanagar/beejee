@@ -7637,6 +7637,10 @@ sort-keys@^1.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
+sort-multidimensional-array-func@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/sort-multidimensional-array-func/-/sort-multidimensional-array-func-1.0.1.tgz#87bc7e91e16b538db2b2b8090964f44059d9d7bc"
+
 source-list-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.0.tgz#aaa47403f7b245a92fbc97ea08f250d6087ed085"

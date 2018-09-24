@@ -16,7 +16,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
     "reactstrap": "^6.4.0",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "sort-multidimensional-array-func": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

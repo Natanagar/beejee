@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Route } from 'react-router-dom';
 //import DataUsers from './components/TaskListJson';
 import SortTable from './components/SortTable';
+import sortMultidimensionalArrayFunc from 'sort-multidimensional-array-func';
 import './App.css';
 
 class App extends Component {
@@ -339,15 +340,17 @@ class App extends Component {
       return 0;
     };
   }
-  sortingTable = key => {
-    let sortedArray = this.state.users.sort(this.compareBy(key))
-    console.log(sortedArray)
-    this.setState({
-      users : sortedArray
-    })
+ 
 
-  }
+  sortingTable = (key) => {
+     let sortedArray = this.state.users.sort(this.compareBy(key))
+      console.log(sortedArray)
+      this.setState({
+        users : sortedArray
+      })
 
+    }
+  
   componentDidMount(){
     this.getDatasFromServer();   
   }
