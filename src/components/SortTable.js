@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import SortTableHeader from './SortTableHeader';
 import { Link } from 'react-router-dom';
 import { Table, Button } from 'reactstrap';
-import Pagination from "react-js-pagination";
-//import "bootstrap/less/bootstrap";
+import Pagination from './Pagination';
+
 
 class SortTable extends Component {
    /* static propTypes = {
@@ -12,7 +12,7 @@ class SortTable extends Component {
     
     render(){
     
-       const { users, addChangedDatasFromAdmin, getChangedTasksFromAdmin, columns, sendDatasFromAdmin, sortingTable, activePage, handlePageChange } = this.props
+       const { users, addChangedDatasFromAdmin, getChangedTasksFromAdmin, columns, sendDatasFromAdmin, sortingTable, activePage, handlePageChange, tasks } = this.props
 
         return(
     
@@ -38,7 +38,7 @@ class SortTable extends Component {
                 <Pagination
                     activePage={activePage}
                     itemsCountPerPage={3}
-                    totalItemsCount={450}
+                    totalItemsCount={tasks}
                     pageRangeDisplayed={3}
                     onChange={handlePageChange}
                     />

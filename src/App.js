@@ -5,7 +5,6 @@ import ErrorBoundary from './components/ErrorBoundary';
 import axios from 'axios';
 import { Route } from 'react-router-dom';
 import SortTable from './components/SortTable';
-import Pagination from "react-js-pagination";
 //import "~bootstrap/less/bootstrap";
 import sortMultidimensionalArrayFunc from 'sort-multidimensional-array-func';
 import './App.css';
@@ -197,16 +196,19 @@ class App extends Component {
         method:'get',
         url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Agarkova',
         param : {
-          page : Number
+          page : 0
         }
       })
       .then((response) => {
-        
+        console.log(response.data)
         const tasksFromServer = response.data.message.tasks
         const tasksAmount = response.data.message.total_task_count
-        console.log(tasksAmount)
+        
         if(tasksFromServer !== this.state.users){
-          this.setState({ users : tasksFromServer })
+          this.setState({ 
+            users : tasksFromServer,
+            tasks : tasksAmount 
+          })
         }
       })
       .catch(error => console.log(error))
@@ -372,7 +374,7 @@ class App extends Component {
     }
   handlePageChange(pageNumber) {
     console.log(`active page is ${pageNumber}`);
-    this.setState({activePage: pageNumber});
+    //this.setState({activePage: pageNumber});
   }
 
   componentDidMount(){
@@ -380,8 +382,8 @@ class App extends Component {
   }
 
   render(){
-    const { users, admin, checkedAdminLogin, searchValue, columns, activePage } = this.state;
-  
+    const { users, admin, checkedAdminLogin, searchValue, columns, activePage, tasks } = this.state;
+    
     //const filteredUsers = users.filter(user => {
        // return user.text.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
     //})
@@ -399,6 +401,7 @@ class App extends Component {
               columns={columns}
               users={users}
               admin={admin}
+              tasks={tasks}
               checkEmailAndPasswordAdmin={this.checkEmailAndPasswordAdmin}
               getAdminLogin={this.getAdminLogin}
               checkedAdminLogin={this.state.checkedAdminLogin}
