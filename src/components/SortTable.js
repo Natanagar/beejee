@@ -3,7 +3,7 @@ import SortTableHeader from './SortTableHeader';
 import { Link } from 'react-router-dom';
 import { Table, Button } from 'reactstrap';
 import Pagination from "react-js-pagination";
-import "~bootstrap/less/bootstrap";
+//import "bootstrap/less/bootstrap";
 
 class SortTable extends Component {
    /* static propTypes = {
@@ -12,7 +12,7 @@ class SortTable extends Component {
     
     render(){
     
-       const { users, addChangedDatasFromAdmin, getChangedTasksFromAdmin, columns, sendDatasFromAdmin, sortingTable } = this.props
+       const { users, addChangedDatasFromAdmin, getChangedTasksFromAdmin, columns, sendDatasFromAdmin, sortingTable, activePage, handlePageChange } = this.props
 
         return(
     
@@ -36,11 +36,11 @@ class SortTable extends Component {
                     </tbody>
                 </Table>
                 <Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={10}
+                    activePage={activePage}
+                    itemsCountPerPage={3}
                     totalItemsCount={450}
-                    pageRangeDisplayed={5}
-                    onChange={this.handlePageChange}
+                    pageRangeDisplayed={3}
+                    onChange={handlePageChange}
                     />
                 <Link
                     exact to='/'>

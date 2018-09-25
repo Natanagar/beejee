@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SortTable from './SortTable';
 import Pagination from "react-js-pagination";
-import "~bootstrap/less/bootstrap";
+//import "~bootstrap/less/bootstrap";
 
 class TasksList extends Component{
     render(){
         const { users, checkEmailAndPasswordAdmin, getAdminLogin, checkedAdminLogin, checkedAdminPassword, getAdminPassword, 
-            filteredUsers, columns, sortingTable } = this.props;
+            filteredUsers, columns, sortingTable, activePage, handlePageChange } = this.props;
         
       
         if(checkedAdminPassword && checkedAdminLogin){
@@ -22,15 +22,10 @@ class TasksList extends Component{
                     users={users}
                     getChangedTasksFromAdmin={this.getChangedTasksFromAdmin}
                     sortingTable={sortingTable}
+                    activePage={activePage}
+                    onChange={handlePageChange}
+                    />
                     
-                    />
-                    <Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={10}
-                    totalItemsCount={450}
-                    pageRangeDisplayed={5}
-                    onChange={this.handlePageChange}
-                    />
                         <Link 
                         to='/task'
                         >
@@ -88,6 +83,7 @@ class TasksList extends Component{
                     columns={columns}
                     sortingTable={sortingTable}
                     />
+                    
             
             </div>
             <Link

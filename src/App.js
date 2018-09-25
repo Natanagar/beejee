@@ -4,10 +4,9 @@ import TasksList from './components/TasksList';
 import ErrorBoundary from './components/ErrorBoundary';
 import axios from 'axios';
 import { Route } from 'react-router-dom';
-//import DataUsers from './components/TaskListJson';
 import SortTable from './components/SortTable';
 import Pagination from "react-js-pagination";
-import "~bootstrap/less/bootstrap";
+//import "~bootstrap/less/bootstrap";
 import sortMultidimensionalArrayFunc from 'sort-multidimensional-array-func';
 import './App.css';
 
@@ -197,9 +196,15 @@ class App extends Component {
       axios({
         method:'get',
         url: 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Agarkova',
+        param : {
+          page : Number
+        }
       })
       .then((response) => {
-        let tasksFromServer = response.data.message.tasks
+        
+        const tasksFromServer = response.data.message.tasks
+        const tasksAmount = response.data.message.total_task_count
+        console.log(tasksAmount)
         if(tasksFromServer !== this.state.users){
           this.setState({ users : tasksFromServer })
         }
@@ -375,7 +380,7 @@ class App extends Component {
   }
 
   render(){
-    const { users, admin, checkedAdminLogin, searchValue, columns } = this.state;
+    const { users, admin, checkedAdminLogin, searchValue, columns, activePage } = this.state;
   
     //const filteredUsers = users.filter(user => {
        // return user.text.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1;
@@ -390,6 +395,7 @@ class App extends Component {
           exact path="/"
             render={()=>(
               <TasksList
+              activePage={activePage}
               columns={columns}
               users={users}
               admin={admin}
@@ -403,6 +409,7 @@ class App extends Component {
               //filteredUsers={filteredUsers}
               getDatasFromServer={this.getDatasFromServer}
               sortingTable={this.sortingTable}
+              handlePageChange={this.handlePageChange}
               
 
               />
